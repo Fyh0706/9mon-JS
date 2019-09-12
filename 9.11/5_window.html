@@ -12,9 +12,9 @@
 
 </html>
 <script>
-    console.log(a,b);
-    let a = 12;
-    const b = 13;
+    // console.log(a,b);
+    // let a = 12;
+    // const b = 13;
     //let 、const 不存在变量提升
     /* 
         想用let 和const 声明的变量，必须在声明的下方使用
@@ -29,5 +29,14 @@
         
 
      */
+    function fn(){
+        return function f(y) {
+            console.log(y);
+            
+            
+        }
+    }
+    fn(8)(9);
+
 
 </script>
