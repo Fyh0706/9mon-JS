@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>         
+             function factoy(name="zf"/*ES6赋默认值只有实参为undefined时才走,*/,age=10,sex=1) { 
+                 //ES5赋默认值 name=name || "zf";            
+            var obj={
+                name,age,sex,
+                eat(){},
+                play(){}
+            }
+            return obj;
+         }                
+         var per11=factoy("王果果",10,1);
+         var per2=factoy(null,null,null)
+         console.log(per11);
+            
+
+             //一般用来写插件
+         function Person(name,age,sex) {
+             this.name=name;
+             this.age=age;
+             this.sex=sex;
+             this.eat=function(){}
+             this.play=function(){}
+             
+         }
+           var per22=new Person("aa",100,1);//new 执行函数的时候，函数内部的this都是指向一个堆内存
+           //函数执行完成之后，又把this反出去了 若写了返回值，但是返回的是个值类型，那么默认返回仍然时this
+           //若返回值是个引用数据类型，则return返回值默认是这个引用数据类型。
+           console.log(per22);
+           //ES6 的箭头函数是不能通过new的方式执行      
+           //ES6 创造类的方式 是通过class创造的；
+           var FN2=()=>{
+               this.name=111;
+           }
+           class FN3{
+
+            constructor(name,age){
+                this.name=name;
+                this.age=age;
+            }
+           }
+           var f3=new FN3("你好",10);
+           console.log(f3);
+           
+           
+       /* 
+       
+       
+       */
+
+</script>
