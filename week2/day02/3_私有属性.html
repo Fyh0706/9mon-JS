@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    /* 
+     in 是用来查看 弄个属性 是否属于某个对象；换句话说 就是 该对象能否调到该对象。
+      // in 只能判断出某个属性 是不是属于某个对象 ；但不能区别出是否是他的私有属性。
+      obj.hasOwnProperty("xxx") 这个属性可以用来查看xxx是否是  obj的私有属性
+      hasOwnproperty 方法在基类的原型上，所有任何数据类型（除去 null undefined ） 都能调用到该方法。
+
+    */
+   
+   var obj={};
+   obj.__proto__.hasPubProperty= function (n){
+      return   (n in this && !this.hasOwnProperty(n) ? true : false)
+   }
+obj.hasPubProperty("aaada")
+   
+
+</script>

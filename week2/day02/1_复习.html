@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /*
+           面向对象：
+               类          实例
+             人类        奥巴马
+
+             JS中的内置类
+              Array String  Number Function RegExp Date  Object ..
+
+              字面量        var ary=[];
+              构造函数      var ary=new Array();
+
+              //万物皆对象
+              自定义类          function A(){}
+              自定义类的实例只能通过     new  的方式创建
+              JS中常见的设计模式
+                  单例模式
+                  高级单例
+                  工厂模式
+                  构造函数模式
+                  原型模式
+            */
+    //单例模式 --> 命名空间
+    var obj = {
+        name: "xxxx",
+        age=10
+    };
+
+    //高级单例模式  闭包 比普通单例 多了隐私空间
+    var obj2 = (function () {
+        name = "xxx",
+            age = 10;
+        function f() {
+            console.log(name, age);
+
+        }
+        function changeAge(n) {
+            age = n;
+        }
+        return {
+            name, age, f
+        }
+    })()
+    //工厂模式  批量产生单例模式
+    function factory(name, age) {
+        var obj = {
+            name,
+            age,
+            eat() { },
+            play() { }
+        }
+        return obj
+    }
+    //构造函数模式
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.eat = function () { };
+        this.play = function () { }
+    }
+    var p1 = new Person("xxx", 100);//p1是Person 类的一个实例
+    //new 执行时； 函数中的this 就是当前创造的实例。 默认返回的就是this;
+    console.log(p1);
+
+    class Man {
+        //class 只能通过new执行
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+    //原型模式 在构造函数的基础上增加了一个原型的概念 (prototype) ; 原型其实就是一个堆内存
+    function Women(name, age) {
+        this.name = name;
+        this.age = age;
+
+    }
+    Women.prototype.eat = function () {
+        console.log("吃");
+
+    }
+    Women.prototype.play = function () {
+        console.log("玩");
+
+    }
+    var w1 = new Women("xxx", 12);
+    var w2 = new Women("xxxxx", 12);
+    w1.eat === w2.eat; //实例 会通过 __proto__ 去访问所属类的原型
+
+
+    //作用域链 是变量的查找机制;
+    //原型链    是属性的查找机制;先在自己身上查找,没有的话  通过  __proto__再去所属类的原型上查找,
+    //              若所属类的原型上也没有该属性，则通过该原型的  __proto__ 再去原型所属类的原型上接着查找，
+    //           直到找到Object类(基类)的原型上， 再没有的话 就是 undefined;
+    class Gril {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        eat() {
+            console.log("吃");
+
+        }
+        play() {
+            console.log("玩");
+
+        }
+    }
+    var g1 = new Gril("xxxx", 1),
+        g2 = new Gril("xxxxxxx", 2)
+        g1.eat===g2.eat
+
+
+
+
+
+
+</script>
