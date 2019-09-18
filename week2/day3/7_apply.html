@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /* 
+      apply 功能 类似于 call
+    */
+
+    function fn() {
+        console.log([...arguments]);
+        console.log(this);
+        console.log("---------------------");
+    }
+    var obj = {
+        a: 20,
+        b: 40
+    }
+    fn.apply([1, 2, 3]);
+    // fn.call(obj, 5, 6, 7, 8)
+    // fn.apply([1,2,3]);//第二个参数是个数组或者类数组的集合，虽然是以一个集合的形式传过去，但是fn接收时还是散乱的接受的
+    Function.prototype.myApply = function myApply(content, list) {
+
+        content = content || window;
+        list = list || [];
+        let m = Symbol();
+        content[m] = this;
+        var res = content[m](...list);
+        delete content[m];
+        return res;
+    }
+
+    fn.myApply(obj)
+
+
+            
+
+
+</script>

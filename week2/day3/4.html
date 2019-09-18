@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+     
+       Number.prototype.push=function(n){
+              return   this+n;
+
+       }
+       Number.prototype.minus=function(n){
+           return this-n;
+       }
+        let n=10;
+        console.log( n.push(10).minus(5));//链式调用  前面的结果要保证可以调到后面的方法
+        // 链式调用 要保证 前边函数的返回结果，可以调用到后面的函数；
+        
+ 
+
+
+
+</script>

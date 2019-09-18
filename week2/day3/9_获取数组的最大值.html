@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /* 
+     
+    */
+    var ary = [1, 2, 3, 4, 5, 6, 7, 8, 9, 45, 6];
+    Math.max(...ary);
+    Math.max.apply(Math, ary);//利用了 apply 可以把集合散乱的传给前面的函数
+    ary.sort((a, b) => b - a)[0];
+    //假设法
+
+    var str = "qejoidjwdfhsodmadikadoajpsajpsa";
+    var arr = str.split("");
+    console.log(arr);
+    arr.sort((a, b) => {
+        return a.localeCompare(b) //姓名排序，字母排序
+    })
+    console.log(arr.join(""));
+    console.log(str.split("").sort().join(""));
+     
+ 
+
+
+
+
+
+
+
+</script>

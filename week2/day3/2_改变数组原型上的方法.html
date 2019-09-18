@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+                     /* 
+                          内置类的原型上的方法可以被修改，但是不能被重构
+                     
+        //               */
+        //    Array.prototype.pop=function(){
+        //        console.log(666);
+               
+        //    }
+
+            
+        //    var ary=[1,2,3,4];
+        //    console.log(ary.pop());
+        var ary=[1,2,3,42,42,34,24,23,2,2,2,2,22]
+        Array.prototype.unique=function(){
+            //this 都是当前类的实例
+            let arr= [...new Set(this)];
+                 this.length=0;
+                   arr.forEach(item=>{
+               this.push(item);
+           })
+           return this
+        }
+       console.log( ary.unique());
+
+       //
+       Array.prototype.unique = function(){
+        var obj = {};
+        for(var i = 0; i < this.length ; i++){
+            if(obj.hasOwnProperty(this[i])){
+                this.splice(i,1);
+                i--;
+            }else{
+                obj[this[i]] = this[i]
+            }
+        }
+    }
+       
+           
+
+</script>

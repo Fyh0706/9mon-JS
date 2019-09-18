@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    //  call 是用来改变函数内部的 this  指向的；
+    function fn() {
+        console.log([...arguments]);
+        //把类数组转为数组
+        /*   [].slice.call(arguments,0);
+          [...arguments];
+          Array.from(arguments); */
+
+        console.log(this);
+
+
+
+    }
+    var obj = {
+        a: 12,
+        b: 13,
+        f: fn
+    }
+    // fn(1, 2, 3, 4);
+    // obj.f(6, 6, 6);
+    // fn.call(obj, 5, 5, 5)
+    //call 可以让函数执行 并且 可以改变 函数执行时内部的 this  指向。this 指向了call 的第一个实参，call后面的所有参数，都被作为实参 传给了 前面的函数
+
+    // obj.f.call(window, 6, 6, 6)
+    // Object.prototype.toString.call()
+    //call 方法 是在Function类 的 原型上
+
+    Function.prototype.myCall = function myCall(context, ...arg) {//...剩余预算符
+        //this--->fn
+        // this(...arg);//...扩展运算符
+        //让fn执行，并且让函数中的 this 是context
+
+        // context.qqq=this;
+        // context.qqq(...arg);
+
+
+        // delete context.qqq;
+        context = context || window
+        let con = Symbol();
+        context[con] = this;
+        let res = context[con](...arg);
+        delete context[con];
+        return res
+
+
+
+
+    }
+    fn.myCall(obj, 6, 6, 6);
+
+</script>
