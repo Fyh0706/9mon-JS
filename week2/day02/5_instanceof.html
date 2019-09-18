@@ -11,17 +11,39 @@
 </body>
 </html>
 <script>
-         var ary=[];
-         var n=10;
-         var m=new Number(10);
-        console.log( ary instanceof Array);
-        console.log( ary instanceof Object);
-        console.log( ary instanceof Number);
-        console.log( n instanceof Number);
-        console.log(m instanceof Number);
-       // xxx instanceof  xxx2  ;查看  xxx 到基类的原型链上 是否存在 xxx2 的身影；
+    //      var ary=[];
+    //      var n=10;
+    //      var m=new Number(10);
+    //     console.log( ary instanceof Array);
+    //     console.log( ary instanceof Object);
+    //     console.log( ary instanceof Number);
+    //     console.log( n instanceof Number);
+    //     console.log(m instanceof Number);
+    //    // xxx instanceof  xxx2  ;查看  xxx 到基类的原型链上 是否存在 xxx2 的身影；
           // 存在就是true 不存在 就是false 
           // 值类型的数据  instanceof 谁 都是false;
+
+          // var f=new f()  就返回对象  有this.属性 那么这个f对象里面肯定有这个属性。没有this. 就返回一个空对象 
+            // 如果return 一个值类型  那么这个return this 就不变  如果return { name:"xiaoming"}
+        // var f=f() 就返回return 后面是什么 f就是什么,没有就undefined; 
+             
+          function f(age){
+              console.log(2);
+             this.age=age
+                           
+              
+          }
+          var ff= new f();
+          console.log(ff);
+          
+        //   console.log(ff);
+        //   var obj={};  {}
+        //   console.log(obj);
+
+
+
+          
+          
         
 
 </script>
