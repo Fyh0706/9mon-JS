@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+      function f1() {
+        console.log(arguments);
+        console.log(this);
+        console.log("------------");
+    }
+  Function.prototype.myApply=function(context=window,arg=[]){
+     let a=Symbol();
+      context[a]=this;
+      let res=context[a](...arg);
+      delete context[a];
+      return res;
+  }
+ f1.apply([123,45]);
+
+</script>

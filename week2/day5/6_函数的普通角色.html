@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    /* 
+     function f(){}
+     普通函数
+     构造函数
+     普通对象
+    
+    
+    */
+    function f(...arg) {//arg 
+        console.log(arguments.toString());
+        console.log(arg);
+        Array.from(arguments);
+        [...arguments];
+        console.log(arguments.toString);
+        
+
+        return arg.concat([1, 2, 3]);
+
+    }
+    // console.log(f(1, 2, "3qeq424", 4));
+
+
+
+</script>

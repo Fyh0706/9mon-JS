@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="nameBtn">姓名</button>
+    <button id="ageBtn">年龄</button>
+    <ul id="box">
+        <li>
+            <strong>姓名：小明</strong>；
+            <strong>年龄：10</strong>
+        </li>
+    </ul>
+</body>
+
+</html>
+<script>
+    var ary = [
+        { name: "小明", age: 10 },
+        { name: "小车", age: 20 },
+        { name: "小干", age: 30 },
+        { name: "小❀", age: 13 },
+        { name: "小紫", age: 12 },
+    ]
+    function render() {
+        var str = "";
+        ary.forEach(item => {
+            let { name, age } = item;//对象的解构复制
+            str += ` <li>
+            <strong>姓名：${name}</strong>；
+            <strong>年龄：${age}</strong>
+        </li>`
+        })
+        box.innerHTML = str;
+
+    }
+    render();
+    nameBtn.flag = ageBtn.flag = 1;
+    nameBtn.onclick = function () {
+        this.flag *= -1;
+        ary.sort((a, b) => {
+            return (a.name).localeCompare(b.name) * this.flag;
+        })
+        render();
+    }
+
+
+
+
+    ageBtn.onclick = function () {
+        this.flag *= -1;
+        ary.sort((a, b) => {
+            return (a.age - b.age) * this.flag;
+        })
+        render();
+
+    }
+
+
+    /*
+     对象的解构赋值
+      var obk={name:234,age:1324};
+      var{age}=obj;
+      var{name,age}=obj;
+      age 就是一个变量 对应的值是对象中age对应的属性值。
+
+    */
+
+</script>

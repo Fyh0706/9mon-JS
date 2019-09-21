@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    /* 
+        类       实例
+       Array      []
+       Function   f
+       Object     {} 基类
+         
+       原型链    属性的查找机制  默认通过 __proto__向所属类的原型上查找，若没有可以一直查找到基类的原型上
+       作用域链   变量的查找机制
+
+       每一个函数 都有一个天生自带的属性 prototype 指向自己的原型对象
+       每一个对象 都有一个天生自带的属性 __proto__ 指向所属类的原型对象
+       每一个原型对象 都有一个天生自带的属性 constructor 指向 对应的构造函数本身
+
+       所有类都是函数 都有一个__proto__指向Function 的原型对象
+       所有的原型对象  都有一个__proto__ 指向基类的原型对象
+
+       自定义类 
+
+    */
+    function Person() {
+        this.name = 123;
+    }
+    Person.prototype.eat = function () {
+
+    };
+    class Man {
+        constructor() {
+            this.name = 123;
+        }
+        eat() {
+            //保证这里的this 都是 当前类的实例
+            //再class 声明的类中 原型上的公用属性 只能是函数。
+        }
+    }
+    var p1 = new Person();
+    var man = new Man();
+    Array.prototype.pop = function (n = 1) {
+        n = n > this.length ? this.length : n;
+        var temp = this.slice(this.length - n);
+        this.length -= n;
+        return temp;
+    }
+    var ary = [1, 2, 3, 4, 5, 20];
+
+    // console.log(ary.pop(1));
+    // console.log(ary);
+
+    Array.prototype = {};//原型重构 不起作用    ；内置类的原型是不能重新赋值的；
+    //自定义类的原型重构时需要注意 constructor的指向。
+
+    //max 数组中的最大值         average 数组的平均值
+
+    Array.prototype.max = function () {
+
+        return Math.max(...this);
+    }
+    Array.prototype.average = function () {
+        return this.reduce((a, b) => a + b) /this.length;
+    }
+
+
+
+</script>
