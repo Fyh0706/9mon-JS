@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // xxx instanceof xxx2  "xxx到基类的原型链上 有没有 xxx2的原型";
+    /// 所有的引用数据类型 instanceof Objcet  都是true
+    //  所有的值类型 instanceof 任意  都是false;
+    function myInstance(temp, classN) {
+        //temp 通过__proto__向上查的时候
+        //若有某次的__proto__==classN.prototype
+        if (temp === null || temp === undefined) return false;
+        let str = typeof temp;
+        if (str !== "object" && str !== "function") return false;//不是对象也不是函数 证明是值类型；
+        var left = temp.__proto__,
+            right = classN.prototype;
+        while (left) {
+
+            if (left === right) return true;
+            left = left.__proto__;
+        }
+
+
+        return false;
+    }
+    myInstance([], Array);
+
+
+</script>

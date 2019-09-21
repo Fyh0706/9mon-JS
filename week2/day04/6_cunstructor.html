@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    function getType(temp) {
+        var str = temp.constructor.toString();//toSting()   函数上的toString();
+        return str.slice(9, str.indexOf("(")).toLowerCase();
+    }
+    getType("");
+
+    //原型重构 只针对自定义；
+    function Person(name, age) {
+        this.name = name;
+        this.age = age
+    }
+    Person.prototype = {
+        constructor:Person,
+        eat() {
+            console.log("王车干吃粑粑");
+        },
+        play() {
+            console.log("王车干玩粑粑");
+        }
+
+    }
+    var p1=new Person('xm',20);
+    
+
+</script>

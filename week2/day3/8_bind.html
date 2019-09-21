@@ -41,12 +41,12 @@
 
     //实现一个myBind 用法等同于bind;
     Function.prototype.myBind = function (content, ...arg) {
-        var _this = this;
+        
          
 
-        return function (...ary) {
+        return (...ary)=>{
 
-           return _this.apply(content,arg.concat(ary ));
+           return this.apply(content,arg.concat(ary));
         }
     }
           var f2=fn.myBind(obj,6,6,6,6);

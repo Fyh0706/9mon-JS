@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    //实现一个判断数据类型的方法 getType()
+    Object.prototype.getType = function () {
+        let str = this.constructor.toString();//任意实例的constructor 都是 Object原型
+        return str.slice(9, str.indexOf("(")).toLowerCase();
+    }
+    Array.prototype.myPop = function () {
+
+        this.length--;
+        return this;
+    }
+    Array.prototype.myPush = function (...ary) {
+
+        for (let i = 0; i < ary.length; i++) {
+            this[this.length] = ary[i];
+
+        }
+        return this;
+    }
+    var ary = [1, 2, 3, 4, 3, 4, 5, 4, 5, 2, 1  ];
+    Array.prototype.myReverse = function () {
+        for (var i = 0; i < this.length / 2; i++) {
+            var temp = this[i];
+            this[i] = this[this.length - 1 - i];
+            this[this.length - 1 - i] = temp;
+        }
+        return this;
+    }
+    Array.prototype.myUnique = function () {
+        // var ary =[...(new Set(this))];
+        // this.length = 0;
+        // this.push(...ary);
+        // // for (let i = 0; i < ary.length; i++) {
+        // //     this[i] = ary[i];
+
+        // // }
+        // var obj={};
+        // for (let i = 0; i < this.length; i++) {
+        //     var temp=this[i];
+        //     if(obj.hasOwnProperty(temp)){
+        //         this.splice(i,1);
+        //         i--;
+        //     }
+        //     else{
+        //         obj[temp]=temp;
+        //     }
+
+        // }
+
+        for (let i = 0; i < this.length; i++) {
+            if (this.indexOf(this[i]) !== this.lastIndexOf(this[i])) {
+                this.splice(i, 1);
+                i--;
+            }
+
+
+        }
+        return this;
+
+    }
+
+</script>

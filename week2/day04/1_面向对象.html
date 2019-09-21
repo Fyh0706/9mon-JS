@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /* 
+     面对对象: 以对象数据类型为导向的编程思想；
+     类             实例 
+      Array          []
+      Function       f
+      Object        {}
+
+
+
+
+      针对面向对象的几种常见设计模式
+        单例模式      高级单例模式
+        工厂模式
+        构造函数模式
+        原型模式
+    */
+
+    // call 函数执行,就是改变this指向  把后面参数传给前面函数。 
+    Function.prototype.myCall = function myCall(context, ...arg) {
+        context = context || window;
+        let m = Symbol();
+        context[m] = this;
+        let res = context[m](...arg);
+        delete context[m];
+        return res
+    }
+
+    //apply 函数执行 ，改变this指向 后面参数为数组传进前面函数
+    Function.prototype.myApply = function myApply(content, ...arg) {
+        content = content || window;
+        arg = arg || [];
+        let m = Symbol();
+        content[m] = this;
+        let res = content[m](arg);
+        delete content[m];
+        return res;
+
+    }
+    //bind 改变this指向 后面参数传进去前面的函数里面，返回新的函数；
+    function f() {
+        this.age = 123;
+        return 123;
+    }
+    Function.prototype.myBind = function myBind(context, arg) {
+        return (...ary) => {
+            return this.apply(context, arg.concat(ary));
+        }
+    }
+
+    var myb = f.bind(ary, 123);
+    myb(123);
+    function myNew(...arg) {
+        var obj = {};
+        var Constructor = arg.shift();
+        obj.__proto__ = Constructor.prototype;
+        var res = Constructor.call(obj, ...arg);
+        return typeof res === "object" ? res : obj;
+
+    }
+    // constructor  检测左边是不是右边的实例
+    //[].constructor ===Array;
+    function type(temp) {
+
+
+        var str = temp.constructor.toString();
+
+
+        return str.slice(9, str.indexOf("(")).toLowerCase();
+    }
+    type("");
+
+    //instanceof   xxx 到 xxx2 的原型链上有没有
+    function myInstance(L, R) {
+
+        let m = typeof L;
+        if (m !== "object" && m !== "function") return false;
+        var temp = L_proto__;
+        while (temp) {
+            if (temp === R.prototype) return ture;
+            temp = temp.__proto__;
+
+        }
+        return false;
+    }
+    //首先检测一下这个属性是否可以被这个东西调到
+    Object.prototype.hasOwnPu=function(context){
+        return context in this && !this.hasOwnProperty(context);
+
+    }
+    
+
+</script>
