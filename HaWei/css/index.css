@@ -35,28 +35,21 @@
     margin-left: 5px;
     display:inline-block;
 }
-.sort_ul>li:first-child a s{
-    
-   
-     background-image:url("../img/icon1.png");
-       background-position-y: -90px; 
-   
-
-}
-.sort_ul>li:nth-child(2) a s{
- 
+#timeimg{
     background-image:url("../img/icon1.png");
-      background-position-y: -70px; 
-  
-
+    background-position-y: -70px; 
 }
-.sort_ul>li:last-child a s{
- 
+#priceimg{
     background-image:url("../img/icon1.png");
-      background-position-y: -28px; 
-  
+    background-position-y: -70px; 
+}
+
+#evimg{
+    background-image:url("../img/icon1.png");
+    background-position-y: -28px; 
 
 }
+ 
 
 .sort_ul li a:hover{
     
@@ -75,6 +68,10 @@
     margin-right: 20px; 
     text-align: center;
     position: relative;
+    margin-bottom: 10px;
+}
+.body>li:nth-child(5n){
+  margin-right: 0px;
 }
 .body li .p-img{
     
@@ -99,6 +96,7 @@
     color: #666;
     
 }
+
 .body li .p-name span:last-child{ 
    color: red;
     
@@ -127,6 +125,7 @@
    color: #666
    
 }
+
 .body li .p-button tr>td:first-child {
     border-left: none;
 }
@@ -134,20 +133,21 @@
     color: red;
 }
 .body li .p-button tr>td:first-child:hover{
-    background-color: red;
-    
-  
+    cursor: pointer;
+    background-color: red; 
 }
 .body li .p-button tr>td:first-child:hover span{
    
     color:#fff;
   
 }
-
-
-.body>li:last-child{
-    margin-right:0px;;
+.body li .p-button tr>td:last-child {
+    border-right: none;
 }
+.body li .p-time{
+    display: none;
+}
+
 .body li:hover{
     border: 1px solid red;
 }
