@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+    /* 
+          匹配 test
+          捕获 exec 从字符串中获取满足  正则的部分 字符
+    
+    */
+
+    //exec 捕获的结果 第一项是大正则捕获的内容；第二项及以后 是小分组捕获的内容
+    // 第二项就是一个小分组  第三项就是第二个小分组。。。。
+    //如果字符串中没有任何符合正则的字符；则获取到的结果就是 null;
+    var reg = /\d+/
+    var str = '珠峰2019zf2020';
+    var res = reg.exec(str);
+    var reg = /([a-z])+(\d+)/
+    var str = '珠峰2019zf，2020';
+    var res = reg.exec(str);
+
+
+    //正则的贪婪性    ： 一次性会把所有满足正则字符都捕获到  
+    //解决正则的贪婪性 （加号后面写一个?号）
+    var reg = /\d+?/;
+    var str = '珠峰2019zf2020';
+    var res = reg.exec(str);//2019
+
+    //捕获的懒惰性；只捕获一次，不再捕获其他符合正则的字符 通过添加全局修饰符 g 解决； 加上g之后 每次都会更新lastIndex这个属性 lastIndex 属性是控制的下一次开始匹配的起始索引。 
+    //test 和exec这个方法都会更新 lastIndex属性；
+    var reg = /\d+/g;
+    var str = '珠峰2019zf2020';
+    // var res = reg.exec(str);//2019
+    reg.test(str);
+    console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+
+
+    
+</script>

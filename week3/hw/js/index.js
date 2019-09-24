@@ -9,7 +9,7 @@ xhr.onreadystatechange = () => {
         myBind(data);
     }
 }
-xhr.send();
+xhr.send();//发送请求
 let box = document.querySelector("#box"),
     timeBtn = document.querySelector("#timeBtn"),
     priceBtn = document.querySelector("#priceBtn"),
@@ -49,6 +49,6 @@ function myBind(data) {
     Btn(priceBtn, "price");
     Btn(commentBtn, "num");
 }
-var a =document.createDocumentFragment();//文档碎片
+// var a =document.createDocumentFragment();//文档碎片
 
  //点击上架时间
