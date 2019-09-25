@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    var str = "1234451";
+
+    function moneyFormate(str) {
+        let s = '';
+        // s = str.replace(/\d{1,3}(?=(\d{3})+$)/g, function (a) {
+        //     return a + ","
+
+
+        // })
+        return str.replace(/(\d{1,3})(?=(\d{3})+$)/g,"$1,")
+        
+    }
+
+</script>

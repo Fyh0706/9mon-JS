@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="inp">
+</body>
+
+</html>
+<script>
+
+    //replace 替换
+    '2019-2-2'.replace(/-/g, "");
+    var str = "sdfgh23323jt2343re543534rtyuytr";
+    str.replace(/\d+/g, "-");
+    // 以 去除前后空格
+    var str = "      s     dfgh23323jt2343re5435        34rtyuytr     ";
+    str.replace(/^\s+|\s+$/g, '');
+    inp.oninput = function () {
+        //除了数字 空格其他都不可以输入
+        this.value = this.value.replace(/[^\d ]/g, '');
+    }
+    var str = "aasdaqWERaaf";
+
+    // str.match(/[A-Za-z]/g);
+
+
+
+    str.replace(/[A-Za-z]/g, function ($1) {
+        //replace 的回调函数的实参结果 跟match 和exec 获取的类似 
+        //返回的字符串 是由匹配到的内容被return值 替换之后的新字符串
+        //回调函数执行的次数 与正则匹配到的次数一样
+        if ($1.toLowerCase() == $1) return $1.toUpperCase();
+        return $1.toLowerCase();
+
+    });
+
+    var res = str.replace(/[a-zA-Z]/g, function ($1) {
+        if ($1.toLowerCase() == $1) {
+            return $1.toUpperCase()
+        }
+        return $1.toLowerCase()
+    })
+    console.log(res, 666);
+
+
+    var str = 'aqweAVsdDFEc';
+    var res = str.replace(/([a-z]*)([A-Z]*)/g, function ($0, $1, $2) {
+        return $1.toUpperCase() + $2.toLowerCase()
+    })
+    console.log(res, 1111);
+
+
+
+    var str2 = '';
+    for (var i = 0; i < str.length; i++) {
+        let a = str[i];
+        if (a.toLowerCase() == a) {
+            // 说变量a对应的字符是一个小写字母
+            str2 += a.toUpperCase(); // toUpperCase()  把字母转成大写
+        } else {
+            str2 += a.toLowerCase(); // toLowerCase()  把字母转成小写
+        }
+    }
+    console.log(str, str2)
+    let url = "https://www.iconfont.cn/manage/index?manage_type=myprojects&projectId=1350719";
+    function getParam(url) {
+        let reg = /([^?=&]+)=([^?=&#]+)/g;
+        let obj = {};
+        url.replace(reg, ($0, $1, $2) => obj[$1] = $2);
+        return obj;
+
+    }
+
+</script>

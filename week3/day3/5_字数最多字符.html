@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // /\-/*  */[\w]/g,
+    //获取字符中出现最多的字符
+    var str = "PODJQRYQ8YHEQFR8QIHRBQDBAFI[PQP2EH981QHRAF";
+    function getMax(str) {
+        let obj = {};
+
+        for (let i = 0; i < str.length; i++) {
+            //把字符串中的每一项都当作属性名存储起来；
+            //存储之前先看对象中有没有这个属性  没有 就给obj 增加一个obj一个对应的属性 有 就在现在的值的基础上+1；
+            obj.hasOwnProperty(str[i]) ? obj[str[i]]++ : obj[str[i]] = 1
+        }
+        var val = Object.values(obj);
+        var key = Object.keys(obj);
+        var m = Math.max(...val);
+        var n = key[val.indexOf(m)];
+        // let key = "", num = 0;
+        // for (let k in obj) {
+        //     if (obj[k] > num) {
+        //       key=k;
+        //       num=obj[k]
+        //     }
+        // }
+
+        return {
+            n, m
+        }
+    }
+    var reg = /(\d+)\1/;//\1代表第一个小分组匹配的内容，\2 代表第二个小分组匹配的内容
+    var reg = /(\d+)/g;
+    var str2 = '123456';
+
+    var reg = /(\d+?)\1+/;// \1代表第一个小分组匹配的内容 \2 代表第二个小分组匹配的内容
+    var str = '123123123123123123';
+    console.log(reg.exec(str))
+
+    var reg = /(\d)\1+/g;// \1代表第一个小分组匹配的内容 \2 代表第二个小分组匹配的内容
+    var str = '23123';
+    console.log(reg.exec(str))
+    console.log(reg.exec(str))
+
+    var reg = /([a-z]+)(\d+)\2\1/
+    var str = 'zf20192019zf';
+    console.log(reg.exec(str), 666)
+
+    var str = "PODJQRYQ8YHEQFR8QIHRBQDBAFI[PQP2EH981QHRAF";
+    function getMax2(str) {
+        str = str.split('').sort().join('');
+        var arr = str.match(/([\w\d])\1*/g);
+        arr.sort((a, b) => b.length - a.length)[0];
+        return {
+            key: arr[0][0],
+            num: arr[0].length
+        }
+
+    }
+    function getMax3(str) {
+        str = str.split('').sort().join('');
+        var key = ""; num = 0;
+        var ary = str.replace(/([\w\d])\1*/g, function ($0, $1) {
+            if ($0.length > num) {
+                num = $0.length;
+                key = $1;
+            }
+        })
+        return {
+            key, num
+        }
+
+    }
+
+
+
+
+
+
+
+</script>
