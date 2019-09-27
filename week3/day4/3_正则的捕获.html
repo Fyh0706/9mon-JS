@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    //exec
+    /*           返回结果 若有就是个数组  没有就是null 数组的第一项永远是大正则捕获的内容 ，第二项以后对应的都    是对象小分组捕获的内容
+            捕获的贪婪性 + * {n,m} {n,} 在这些字符后 添加一个 ？即可解决 
+            懒惰性   添加全局修饰符 g
+            给正则添加上 g 之后 每一次的匹配或者捕获都会影响 改正则的lastIndex 属性 这个属性是下一次正则开始匹配的起始索引。
+    
+     */
+    RegExp.prototype.execAll = function (str) {
+        //this 就是你的正则
+        var _this = this;
+        if (!_this.global) {
+            _this = eval(_this + 'g');
+            //   _this=new RegExp(_this,'g');
+        }
+        let ary = [];
+        while (true) {
+            let reg = this.exec(str);
+            if (reg == null) break;
+            ary.push(reg);
+
+
+        }
+
+        // let reg = this.exec(str);
+        // let ary = [];
+        // while (reg) {
+        //     ary.push(reg);
+        //     reg = this.exec(str);
+        // }
+
+
+        return ary.length ? ary : null;
+    }
+    var reg = /\d+/g;
+    var str = "zf2019zf2020";
+    reg.execAll(str)
+
+
+    //cookie
+    //"sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%2216a91b2f43c43-00b58455a87b27-3c644d0e-921600-16a91b2f43d2e%22%2C%22%24device_id%22%3A%2216a91b2f43c43-00b58455a87b27-3c644d0e-921600-16a91b2f43d2e%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_referrer%22%3A%22%22%2C%22%24latest_referrer_host%22%3A%22%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%7D%7D; SUV=1905080941067530; smidV2=2019050809410405042f2e419b3817ca725be23bd4533a00189265daef61150; IPLOC=CN1101; Hm_lvt_51bfa68f6bea432417d90d76280e520f=1567495209,1567734865,1568944687,1569297722; u_main=1044afcba5c47c90b47f9c3f96fd05d2; u_www_souyidai_com=b7c425bb61fce275185c06e83e67f393"
+
+
+    function getCookie() {
+        let cookie =document.cookie;
+        let reg = /([^ ;=]+)=([^ ;=]+)/g;
+        let arr=reg.execAll(cookie);
+        console.log(arr);
+        
+         let obj = {};
+         arr.forEach(item => {
+            obj[item[1]]=item[2];
+       });        
+        return obj
+    }
+    getCookie();  
+    // 捕获 Id
+     var reg=/id=["'](\w+)/g
+</script>

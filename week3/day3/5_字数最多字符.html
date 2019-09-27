@@ -19,7 +19,6 @@
     var str = "PODJQRYQ8YHEQFR8QIHRBQDBAFI[PQP2EH981QHRAF";
     function getMax(str) {
         let obj = {};
-
         for (let i = 0; i < str.length; i++) {
             //把字符串中的每一项都当作属性名存储起来；
             //存储之前先看对象中有没有这个属性  没有 就给obj 增加一个obj一个对应的属性 有 就在现在的值的基础上+1；
@@ -74,7 +73,7 @@
         var key = ""; num = 0;
         var ary = str.replace(/([\w\d])\1*/g, function ($0, $1) {
             if ($0.length > num) {
-                num = $0.length;
+                num = $0.length; 
                 key = $1;
             }
         })

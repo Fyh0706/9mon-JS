@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 一个字符串出现次数最多的字符。
+
+    function getMax(str) {
+        var obj = {};
+        for (let i = 0; i < str.length; i++) {
+            if (obj.hasOwnProperty(str[i])) {
+                obj[str[i]] += 1
+            } else {
+                obj[str[i]] = 1;
+            }
+        }
+        var temp = '',
+            num = 0;
+        for (const k in obj) {
+            if (obj[k] > num) {
+                num = obj[k];
+                temp = k;
+            }
+        }
+        return {
+            temp, num
+        };
+    }
+    var reg = /(\d+)\1+/g;// 回溯
+    function getMax2(str) {
+        str = str.split('').sort().join('');
+        var reg = /(\w)\1*/g;
+        var ary = str.match(reg);
+        ary.sort((a, b) => b.length - a.length)
+        return {
+            key: ary[0][0],
+            val: ary[0].length
+        }
+    }
+    function getMax3(str) {
+        str = str.split('').sort().join('');
+        var reg = /(\w)\1*/g;
+        var obj = {};
+        var temp = '',
+            num = 0;
+        str.replace(reg, function ($0, $1) {
+            obj[$1] = $0.length;
+            if ($0.length > num) {
+                num = $0.length;
+                temp = $1;
+            }
+        })
+        return {
+            temp, num
+        }
+    }
+    //大小写翻转
+    var str = "Hello WORLD"
+    function turn(str) {
+        return str.replace(/\w/g, function (a) {
+            return a.toLowerCase() == a ? a.toUpperCase() : a.toLowerCase();
+        })
+    }
+    var str = "Hello WORLD"
+    function turn1(str) {
+        return str.replace(/([A-Z]*)([a-z]*)/g, function (a, b, c) {
+            return b.toLowerCase() + c.toUpperCase();
+        })
+    }
+    // 小写数字转大写
+    var str = '今年是2017年'; //
+    var ary = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾'];
+    function turn2(str) {
+        return str.replace(/\d/g, function (a) {
+            return ary[a];
+        })
+    }
+    // 4、模板引擎
+    var str = '姓名是：{{name}}，年龄是：{{age}}，性别是{{sex}}';
+    var data = {
+        name: "小明",
+        age: 10,
+        sex: "男"
+    }
+    function formate(template, data) {
+        return template.replace(/\{\{(\w+)\}\}/g, function (a, b) {
+            return data[b];
+        })
+    }
+    //  千分符2 
+    function formateMoney(str) {
+        str = str.split('').reverse().join('');
+        let s = '';
+        for (let i = 0; i < str.length; i++) {
+            if (i % 3 == 2) {
+                s += str[i] + ','
+            } else {
+                s += str[i]
+            }
+        }
+        s = s.split('').reverse().join('');
+        return s.replace(/^,/, '');
+    }
+    function formateMoney(str) {
+        var reg = /(\d{1,3})(?=(\d{3})+$)/g
+        return str.replace(reg, "$1,")
+
+    }
+
+</script>

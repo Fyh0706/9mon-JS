@@ -32,7 +32,7 @@
 
 
 
-    str.replace(/[A-Za-z]/g, function ($1) {
+     str.replace(/[A-Za-z]/g, function ($1) {
         //replace 的回调函数的实参结果 跟match 和exec 获取的类似 
         //返回的字符串 是由匹配到的内容被return值 替换之后的新字符串
         //回调函数执行的次数 与正则匹配到的次数一样
@@ -52,6 +52,8 @@
 
     var str = 'aqweAVsdDFEc';
     var res = str.replace(/([a-z]*)([A-Z]*)/g, function ($0, $1, $2) {
+        console.log($1,$2);
+        
         return $1.toUpperCase() + $2.toLowerCase()
     })
     console.log(res, 1111);
@@ -75,7 +77,7 @@
         let obj = {};
         url.replace(reg, ($0, $1, $2) => obj[$1] = $2);
         return obj;
-
     }
 
 </script>
+
