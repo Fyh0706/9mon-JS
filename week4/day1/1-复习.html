@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="inp">
+</body>
+
+</html>
+<script>
+    inp.oninput = function () {
+
+
+    }
+    let n = 0;
+    inp.oninput = function () {
+        let str = this.value;
+        if (str.length >= n) {
+            n = str.length;
+            if (str.length == 3 || str.length == 8) {
+                str += " ";
+            }
+            if (str.length > 13) {
+                str = str.slice(0, 13);
+
+            }
+            this.value = str;
+        } else {
+            n = str.length;
+
+        }
+
+    }
+</script>
+<script>
+    /*
+                                                                                                              正则
+                                                                                                                        var reg=/\d/;
+                                                                                                                      var reg=new RegExp('\\d','g')
+                                                                                                             匹配  捕获
+                                                                                                                         匹配 tese
+                                                                                                                          捕获 exec  捕获的贪婪性 在量次元字符后面补一个？ 懒惰性加全局修饰符g
+                                                                                                                       \d  \D  \w  \W  \  . [ab] [a-z] [^] [^a-z] ^ $ |   ()   (?:) (?=) (?!)
+                                                                                                                                                                + ? * {n} {n,m} {n,}
+                                                                                                                                                                i  ignoreCase
+                                                                                                                                                                m  mutiline
+                                                                                                                                                                g  global
+
+
+
+        match(正则) 正则没有g 结果跟exec一样，有g 会把字符串中所有的大正则全部捕获到，但是不能捕获小正则                                                                                                   */
+</script>
+<script>
+
+
+</script>

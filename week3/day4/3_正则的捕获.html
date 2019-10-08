@@ -21,6 +21,9 @@
             给正则添加上 g 之后 每一次的匹配或者捕获都会影响 改正则的lastIndex 属性 这个属性是下一次正则开始匹配的起始索引。
     
      */
+          
+
+
     RegExp.prototype.execAll = function (str) {
         //this 就是你的正则
         var _this = this;

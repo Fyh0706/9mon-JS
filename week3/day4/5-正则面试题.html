@@ -117,5 +117,17 @@
         return str.replace(reg, "$1,")
 
     }
+    function formateMoney(str) {
+        var reg = /(\d{1,4})(?=(\d{4})+$)/g;
+        let i = 0;
+        str = str.replace(reg, function (a) {
+            i++;
+            if (i == 1) {
+                return a + '万'
+            } 
+        })
 
+
+        return str
+    }
 </script>
