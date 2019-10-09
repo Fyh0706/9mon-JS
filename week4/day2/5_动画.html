@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            list-style: none;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid salmon;
+            text-align: center;
+            line-height: 200px;
+            user-select: none;
+            position: relative;
+            left: 0;
+            transition:left 1s cubic-bezier(1,-0.05, 0.01, 0.97);
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">点我</button>
+    <div id="box">
+        珠峰培训
+    </div>
+</body>
+
+</html>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    //getComputedStyle(box) 获取box的所有样式，行内和style
+    //box.currentStyle ie 低版本识别
+    //window.onreset         监听窗口大小的改变事件
+    //
+    let box = document.getElementById('box');
+    let l = 0;
+    let w = document.documentElement.clientWidth || document.body.clientWidth;//整屏的宽度
+    let boxW = box.offsetWidth;//盒子的宽度
+    let max = w - boxW;//可移动最大值
+    // // let timer = setInterval(() => {
+    // //     l+=10;
+    // //     if (l >= max) {
+    // //            l=max;
+    // //            clearInterval(timer);
+    // //     }
+    // //     box.style.left = l + 'px';
+    // // }, 10);
+
+    // (function steTimer() {
+
+    //     l += 10;
+    //     if (l >= max) {
+    //         l = max;
+    //     } else {
+    //         setTimeout(() => {
+    //             steTimer();
+    //         }, 10);
+    //         // requestAnimationFrame(steTimer)
+
+    //     }
+    //     box.style.left = l + 'px';
+
+    // })()
+    btn.onclick = function () {
+        box.style.left = max + 'px';
+    }
+</script>

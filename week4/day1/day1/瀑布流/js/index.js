@@ -54,10 +54,10 @@ function getMinLi() {
 //滚动加载更多
 
 window.onscroll = function () {
-    logadMore();
+    loadMore();
     loadAll();
 }
-function logadMore() {
+function loadMore() {
     // if(n>=3)return;
     //最短的li露出底部的时候去加载新数据
     let li = getMinLi();
