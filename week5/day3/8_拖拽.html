@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+        }
+
+        .st {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            cursor: move;
+            background: salmon;
+            position: absolute;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="box" class="st">
+        1
+    </div>
+    <div id="box2" class="st">
+        2
+    </div>
+    <div id="box3" class="st">
+        3
+    </div>
+    <div id="box4" class="st">
+        4
+    </div>
+    <div id="box5" class="st">
+        5
+    </div>
+    <div id="box6" class="st">
+        6
+    </div>
+
+</body>
+
+</html>
+<script>
+    function GPS(idSelector) {
+        this.box = document.getElementById(idSelector);
+        var _this = this
+        this.box.addEventListener('mousedown', function (e) {
+            let o = _this.offset(this);
+            this.l = e.pageX - o.l;
+            this.t = e.pageY - o.t;
+            _this.fn = _this.move.bind(this);
+            document.addEventListener('mousemove', _this.fn, false);
+            //鼠标丢失的问题我们可以通过给doucment绑定事件来解决
+        }, false)
+
+        this.box.addEventListener('mouseup', function (e) {
+            document.removeEventListener('mousemove', _this.fn, false);
+        }, false)
+
+    }
+    new GPS('box');
+    new GPS('box2');
+    new GPS('box3');
+    new GPS('box4');
+    new GPS('box5');
+    new GPS('box6');
+
+    // let box = document.getElementById('box');
+    // //鼠标按下  决定了盒子可以跟随鼠标移动  鼠标抬起 盒子就停止跟随
+    // function move(e) {
+    //         this.style.left = e.pageX - this.l + 'px';
+    //         this.style.top = e.pageY - this.t + 'px';
+    //     }
+    // box.addEventListener('mousedown', function (e) {
+    //     let o = offset(this);
+    //     this.l = e.pageX - o.l;
+    //     this.t = e.pageY - o.t;
+    //     this.fn = move.bind(this);
+    //     document.addEventListener('mousemove', this.fn, false);
+    //     //鼠标丢失的问题我们可以通过给doucment绑定事件来解决
+    // }, false)
+
+    // box.addEventListener('mouseup', function (e) {
+    //     document.removeEventListener('mousemove', this.fn, false);
+    // }, false)
+
+    GPS.prototype.move = function (e) {
+        //this 是当前的实例
+        this.style.left = e.pageX - this.l + 'px';
+        this.style.top = e.pageY - this.t + 'px';
+    }
+
+    GPS.prototype.offset = function (ele) {
+        let l = ele.offsetLeft,
+            t = ele.offsetTop,
+            temp = ele.offsetParent;
+        while (temp) {
+            l += temp.offsetLeft + temp.clientLeft;
+            t += temp.offsetTop + temp.clientTop;
+            temp = temp.offsetParent;
+        }
+        return {
+            l, t
+        }
+    }
+</script>

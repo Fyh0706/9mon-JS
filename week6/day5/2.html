@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 60vw;
+            height: 10vw;
+            /* overflow: hidden; */
+            margin: 20vw auto;
+            border: 1px solid salmon;
+        }
+
+        ul {
+            list-style: none;
+            width: 40vw;
+            margin: auto;
+
+        }
+
+        li {
+            text-align: center;
+            height: 10vw;
+            line-height: 10vw;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li>2015</li>
+            <li>2016</li>
+            <li>2017</li>
+            <li>2018</li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script>
+    let box = document.querySelector('#box');
+    let ul = document.querySelector('ul');
+    let li = document.querySelectorAll('li');
+    let h = li[0].clientHeight;
+    let t = 0;
+    box.ontouchstart = function (e) {
+        let sy = e.touches[0].pageY;
+        document.ontouchmove = function (e) {
+            let cy = sy - e.changedTouches[0].pageY;//手指移动的距离
+            ul.style.transform = `translateY(${-(t + cy)}px)`
+        }
+        document.ontouchend = function (e) {
+            let cy = sy - e.changedTouches[0].pageY;
+            t += cy;
+            //松手的时候我们重新判断当前的t是不是一个合适的整数个t
+            // console.log();
+
+
+            let n = Math.round(t / h);
+            n = n < 0 ? 0 : (n > li.length - 1 ? li.length - 1 : n);
+            t = n * h;
+            ul.style.transform = `translateY(${-t}px)`
+
+        }
+    }
+
+</script>

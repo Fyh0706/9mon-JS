@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let p = new Promise(function (resolve, reject) {
+        // executor 函数
+        // console.log(resolve,reject)
+        resolve(234);//同步把状态变成了 resloved
+        console.log(qqqq);
+
+        console.log(aaa);
+        reject(666);
+        console.log(999)
+    });
+    p.then(function (data) {
+        // resolve
+        console.log(data)
+    }, function (err) {
+        // reject
+        console.log(err);
+    });
+    Promise.all([p1,p2,p3]).then();
+    Promise.race([p1,p2,p3]).then();//赛跑
+    Promise.reject('执行失败').then(()=>{},()=>{})//手动创造一个失败态
+    Promise.resolve('执行成功').theh(()=>{})//手动创造一个成功态
+</script>

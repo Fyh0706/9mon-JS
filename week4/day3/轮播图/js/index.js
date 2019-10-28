@@ -4,9 +4,9 @@ let ul = document.querySelector("#box .img_box ul"),
     tip = document.getElementById("box").getElementsByClassName("tip"),
     leftBtn = document.querySelector("#box .left_btn"),
     rightBtn = document.querySelector("#box .right_btn")
-
-
 //获取数据
+
+
 function getDate() {
     let xhr = new XMLHttpRequest();
     xhr.open('get', './data.json', true);
@@ -23,6 +23,8 @@ function getDate() {
 }
 getDate();
 //渲染数据
+
+
 function render(data) {
     data = data || [];
     data.push(data[0]);//在数组的末尾添加了第一项
@@ -50,11 +52,15 @@ function render(data) {
 }
 let timer;
 let n = 0;
+
+
 function move() {
     timer = setInterval(() => {
         change();
     }, 2000)
 }
+
+
 function change() {
     n++;
     if (n == (tip.length + 1)) {
@@ -63,6 +69,8 @@ function change() {
     }
     animate(ul, { left: -590 * n }, 500, tipClass(n));//圆点跟随在动画结束之后
 }
+
+
 //滑入盒子清除动画
 box.onmouseenter = function () {
     clearInterval(timer);
@@ -70,6 +78,8 @@ box.onmouseenter = function () {
 box.onmouseleave = function () {
     move();
 }
+
+
 function tipClass(m) {
     m = m >= tip.length ? 0 : m
     for (let i = 0; i < tip.length; i++) {
@@ -81,6 +91,8 @@ function tipClass(m) {
 rightBtn.onclick = function () {
     change();
 }
+
+
 leftBtn.onclick = function () {
     n--;
     //n==-1的时候 ,
@@ -90,14 +102,13 @@ leftBtn.onclick = function () {
     }
     animate(ul, { left: -590 * n }, 500, tipClass(n));
 }
+
+
 function tipclick() {
     for (let i = 0; i < tip.length; i++) {
         tip[i].onclick=function() {
-           
-            
             n=i;
             animate(ul, { left: -590 * n }, 500, tipClass(n));
         }
-        
     }
 }

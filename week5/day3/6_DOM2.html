@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        #outer {
+            width: 500px;
+            height: 500px;
+            background: red;
+            margin: 50px auto;
+            padding: 50px;
+        }
+
+        #center {
+            width: 400px;
+            height: 400px;
+            background: green;
+            padding: 50px;
+        }
+
+        #inner {
+            width: 300px;
+            height: 300px;
+            background: salmon;
+            padding: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="center">
+            <div id="inner"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./jquery-3.3.1.js"></script>
+<script>
+    let outer = document.getElementById('outer'),
+        center = document.getElementById('center'),
+        inner = document.getElementById('inner');
+    //DOM 0级事件绑定
+    // box.onclick = function () {
+    //     console.log(66666);
+    // }
+    // box.onclick=function(){
+    //     console.log(555);
+
+    // }
+    //JQ  是利用了DOM的2级事件绑定
+    // $('#box').on('click',function(){
+    //     console.log(1111);
+
+    // })
+    // $('#box').on('click',function(){
+    //     console.log(222);
+
+    // })
+    function fn(e) {
+        console.log(111, e.target);
+
+    }
+
+    inner.addEventListener('click', fn, false);
+    inner.removeEventListener('click', fn, false)
+
+
+
+    /* 
+     DOM 2级事件绑定      元素.addEventListener('事件类型',回调函数,冒泡阶段或者捕获阶段)
+                           IE attachEvent('on事件类型',回调函数) detachEvent('on事件类型',回调函数 
+     2级事件 同一个元素 同一个事件 可以绑定多个回调函数
+        
+    */
+    Element.prototype.one = function (type, callback) {
+        let fn = (e) => {
+            callback.call(this,e);
+            this.removeEventListener(type, fn, false);
+        };
+        this.addEventListener(type, fn, false);
+
+
+    }
+    inner.one('click', function (e) {
+        console.log('myone');
+    })
+    
+</script>

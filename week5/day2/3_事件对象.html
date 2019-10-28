@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        珠峰
+        <span>666</span>
+    </div>
+    <input type="text" id='inp'>
+    <textarea name="" id="text" cols="30" rows="10"></textarea>
+</body>
+
+</html>
+<script>
+    let box = document.getElementById('box');
+    box.onclick = function (e) {
+
+        e = e || window.event;//为了兼容IE低版本
+        var tar = e.target || e.srcElement;//点击的那个元素·
+        console.log(e.target);
+        //e.clientY     鼠标点击是的那个位置到 可视窗口左上角的距离
+        //e.pageY        鼠标点击是的那个位置 到 body 左上角的距离
+        //e.target     e.srcElement    点击的那个元素  事件源 ；    this 是绑定的元素
+    }
+    inp.onkeydown = function (e) {
+        console.log(e);
+        e.keyCode == 13 ? this.blur() : null
+
+    }
+</script>

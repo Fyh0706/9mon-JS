@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            background: green;
+        }
+
+        #box1 {
+            background: red;
+        }
+
+        #box2 {
+            background: salmon;
+        }
+
+        #box,
+        #box1,
+        #box2 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: move;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        1
+    </div>
+    <div id="box1">
+        2
+    </div>
+    <div id="box2">
+        3
+    </div>
+
+</body>
+
+</html>
+<script src="./event.js"></script>
+<script src="./drag.js"></script>
+<script>
+    let n = 0;
+    let box = document.getElementById('box');
+    new Drag('box');
+    on(box, 'myIndex', addIndex);
+    on(box, 'myFly', fly)
+    new Drag('box1');
+    on(box1, 'myIndex', addIndex);
+    on(box1, 'myFly', fly)
+    new Drag('box2');
+    on(box2, 'myIndex', addIndex);
+    on(box2, 'myFly', fly)
+    function addIndex(ele) {
+        ele.style.zIndex = ++n;
+
+    }
+    function fly(ele) {
+        //初速度
+        // 根据速度 设置盒子的位置
+        clearTimeout(ele.flyTimer);
+        ele.speed *= 0.98;
+        var l = ele.offsetLeft + ele.speed;
+        //需要一个边界
+        var maxL = (document.documentElement.clientWidth || document.body.clientWidth) - ele.offsetWidth;
+        // l = l > maxL ? maxL : (l < 0 ? 0 : l);
+        if (l > maxL) {
+            l = maxL;
+            ele.speed *= -1;
+        } else if (l < 0) {
+            l = 0;
+            ele.speed *= -1;
+        }
+        ele.style.left = l + 'px';
+        if (Math.abs(ele.speed) > 0.1) {
+            ele.running = true;
+            ele.flyTimer = setTimeout(function () {
+                fly(ele);
+            }, 30);
+        } else {
+            ele.running = false;
+        }
+    }
+    function drop() {
+        // this 小球
+        if (!this.n) { this.n = 0 }
+        this.dropSpeed += 5;
+        this.dropSpeed *= 0.99;
+        let t = parseFloat(this.style.top) + this.dropSpeed;
+        if (t > this.maxT) {
+            // 到达底部不动时  就会连续执行该条件
+            t = this.maxT;
+            this.dropSpeed *= -1;
+            this.n++
+        } else {
+            this.n = 0
+        }
+        this.style.top = t + 'px';
+        console.log(this.n);
+        if (this.n > 2) return;
+        setTimeout(() => {
+            drop.call(this)
+        }, 30);
+    }
+</script>

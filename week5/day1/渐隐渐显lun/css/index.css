@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#box {
+    width: 590px;
+    height: 470px;
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.img_box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.img_box li {
+    overflow: hidden;
+    position: absolute;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.img_box .desc {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+ 
+}
+.tip_box{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.tip_box .tip {
+    display: inline-block;
+    border: 1px solid salmon;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    
+}
+
+.tip_box .current {
+    background: green;
+    border: 1px solid green;
+
+}
+
+.btn_box {
+   
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    width: 100%;
+         
+}
+.btn_box div{
+    width: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+}
+
+.btn_box .left_btn {  
+    float: left; 
+}
+
+.btn_box .right_btn {
+    float: right;
+ 
+}

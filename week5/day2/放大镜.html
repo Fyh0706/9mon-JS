@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .img_box img {
+        width: 300px;
+        height: 150px;
+    }
+
+    .img_Box {
+        width: 400px;
+        height: 350px;
+        overflow: hidden;
+        border: 1px solid salmon;
+        position: absolute;
+        top: 0;
+        left: 400px;
+    }
+
+    .follow {
+        width: 100px;
+        height: 150px;
+        background: rgba(0, 0, 0, 0.2);
+        display: none;
+        position: absolute;
+     
+    }
+    
+    .img_Box img {
+        width: 600px;
+        height: 350px;
+        display: none;
+        position: absolute;
+        top: 0;
+
+    }
+</style>
+
+<body>
+    <div class="img_box">
+        <img src="./img/1.jpg" alt="">
+        <div class="follow">
+
+            </div>
+            
+    </div>
+   
+    <div class="img_Box">
+        <img src="./img/1.jpg" alt="" id="img">
+    </div>
+</body>
+
+</html>
+<script>
+    let imgbox = document.querySelector(".img_box"),
+        imgBox = document.querySelector('.img_Box'),
+        follow = document.querySelector('.follow');
+        
+
+    imgbox.onmouseenter = function (e) {
+        follow.style.display = "block";
+        imgbox.onmousemove = function (e) {
+            follow.style.top = e.pageY-75 + "px";
+            follow.style.left = e.pageX-50 + "px";
+            img.style.top=-e.pageY+75+'px';
+            img.style.left=-(e.pageX*1.5)+80+'px';
+        }
+        img.style.display='block';
+       
+
+    }
+ 
+
+
+</script>

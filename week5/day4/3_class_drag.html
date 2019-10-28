@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0%;
+        padding: 0%;
+    }
+
+    .st {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        cursor: move;
+        background: salmon;
+        position: absolute;
+        user-select: none;
+    }
+</style>
+
+<body>
+
+    <div id="box" class="st">
+        1
+    </div>
+</body>
+
+</html>
+<script>
+    // let box = document.getElementById('box');
+    // function offset(ele) {
+    //     let l = ele.offsetLeft,
+    //         t = ele.offsetTop;
+    //     let temp = ele.offsetParent;
+    //     while (temp) {
+    //         l += temp.offsetLeft + temp.clientLeft;
+    //         t += temp.offsetTop + temp.clientTop;
+    //         temp = temp.offsetParent;
+    //     }
+    //     return {
+    //         l,
+    //         t
+    //     }
+    // }
+    // function start(e) {
+    //     this.startX = offset(this).l;
+    //     this.startY = offset(this).t;
+    //     this.startPx = e.pageX;
+    //     this.startPy = e.pageY;
+    //     this.MOVE = move.bind(this);
+    //     this.END = end.bind(this);
+    //     document.addEventListener('mousemove', this.MOVE, false);
+    //     document.addEventListener('mouseup', this.END, false)
+    // }
+    // function move(e) {
+    //     this.style.left = e.pageX - this.startPx + this.startX + 'px';
+    //     this.style.top = e.pageY - this.startPy + this.startY + 'px';
+    // }
+    // function end(e) {
+    // 鼠标抬起执行的函数
+    //     console.log(666)
+    //     document.removeEventListener('mousemove', this.MOVE, false);
+    //     document.removeEventListener('mouseup', this.END, false)
+    // }
+    // box.onpointerdown = start;
+    function addZIndex(e) {
+        ele.style.zIndex = Number(ele.style.zIndex) + 1;
+    }
+    class Drag {
+        constructor(id, n) {
+            this.box = document.getElementById(id);
+            this.START = this.start.bind(this);
+            this.MOVE = this.move.bind(this);
+            this.END = this.end.bind(this);
+            // this.ClEAR = this.clear.bind(this);
+            this.n = n;//目标次数
+            this.m = 0;//拖拽次数
+            this.box.addEventListener('mousedown', this.START, false);
+
+        }
+        offset(ele) {
+            let l = ele.offsetLeft,
+                t = ele.offsetTop;
+            let temp = ele.offsetParent;
+            while (temp) {
+                l += temp.offsetLeft + temp.clientLeft;
+                t += temp.offsetTop + temp.clientTop;
+                temp = temp.offsetParent;
+            }
+            return {
+                l,
+                t
+            }
+        }
+        start(e) {
+            this.startX = this.offset(this.box).l;
+            this.startY = this.offset(this.box).t;
+            this.startPx = e.pageX;
+            this.startPy = e.pageY;
+
+            document.addEventListener('mousemove', this.MOVE, false);
+            document.addEventListener('mouseup', this.END, false);
+            addZIndex(this.box);
+        }
+        move(e) {
+            //this是当前的实例
+            this.box.style.left = e.pageX - this.startPx + this.startX + 'px';
+            this.box.style.top = e.pageY - this.startPy + this.startY + 'px';
+        }
+        end(e) {
+            // 鼠标抬起执行的函数
+
+            document.removeEventListener('mousemove', this.MOVE, false);
+            document.removeEventListener('mouseup', this.END, false);
+            this.m++
+            this.n == undefined ? null : (this.m >= this.n ? this.clear() : null)
+        }
+        clear() {
+            this.box.removeEventListener('mousedown', this.START, false);
+        }
+    }
+    new Drag('box')
+</script>

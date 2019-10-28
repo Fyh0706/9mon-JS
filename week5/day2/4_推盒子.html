@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 0;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+
+</html>
+<script>
+    var box = document.getElementById('box');
+    let n = 0;
+    let m = 0;
+    window.onkeydown = function (e) {
+        let code = e.keyCode;
+
+        switch (code) {
+            case 38://上
+                n -= 10;
+                if (n <= 0) {
+                    n = 0
+                }
+                box.style.top = n + 'px';
+                break;
+
+            case 40://下
+                n += 10;
+                if (n >= 578 - 200) {
+                    n = 578 - 200
+                }
+                box.style.top = n + 'px';
+                break;
+            case 37://左
+                m -= 10;
+                if (m <= 0) {
+                    m = 0
+                }
+                box.style.left = m + 'px';
+                break;
+            case 39://右
+                m += 10;
+                if (m >= 1263 - 200) {
+                    m = 1263 - 200;
+                }
+                box.style.left = m + 'px';
+                break;
+            default:
+                break;
+        }
+
+
+
+
+    }
+
+</script>

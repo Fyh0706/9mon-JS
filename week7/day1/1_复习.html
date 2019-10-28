@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /*
+     C3：transition  animation    @keyfram
+         box.addEventListener('transitionend',function(){},{passive:true,capture:true}//先执行默认事件, 在捕获阶段触发)
+        dpr :1 2 3
+     H5 seo优化  标签语义化
+     rem 需要给body 写一个font-size; fn函数
+     1rem  100px   针对设计稿     640px  ----100px;      w(屏幕宽)   ---x 1rem   x=w*100/640 x=html的font-size
+
+     淘宝的fiexible.js   屏幕分10份 1rem=w/10   750的设计稿上量出 100px  100/750*10--->  100/75rem 
+     把 <meta name="viewport" content="width=device-width, initial-scale=1.0">注掉
+    */
+
+    function fn() {
+        let w = document.documentElement.clientWidth || document.body.clientWidth;
+        let x = w / 750 * 100;750 //设计稿的宽度  100  是我们要1rem-100px
+        document.documentElement.style.fontSize = x + 'px';
+    }
+
+</script>

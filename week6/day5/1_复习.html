@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        C3  transition   animation (@keyframs)
+             transform    translate    rotate    skew       scale
+             perspective:2000px 景深   transform-style:preserve-3d 
+        H5   header footer main  nav  section  article ....
+        input   做了增强    color  datelist
+
+
+
+
+        移动端布局
+        
+     -->
+     <div></div>
+     <ul></ul>
+     <ul></ul>
+</body>
+
+</html>
+<script>
+    /* 
+               rem   淘宝的flexible.js      针对设计稿 1rem =100px
+               rem  是根据htmL的font-size 属性决定的  假设 html 的font-size：20px  1rem=20px;
+               淘宝  引入JS 设计稿是640px; 假设从设计稿上量出一个宽度是100px的盒子  那我们应该设置成   100/640*10=== 100/64rem;
+                把一个屏幕分成10份
+                vw  vh  1vw =宽度的1%;
+                假设设计稿是750px  量出100px
+        
+    
+    */
+    function fn() {
+        let w = document.documentElement.clientWidth || document.body.clientWidth;
+        let x = w / 750 * 100;750 //设计稿的宽度  100  是我们要1rem-100px
+        document.documentElement.style.fontSize = x + 'px';
+    }
+
+</script>

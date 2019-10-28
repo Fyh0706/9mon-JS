@@ -38,9 +38,10 @@
             var temp = this[i];
             this[i] = this[this.length - 1 - i];
             this[this.length - 1 - i] = temp;
-        }
+        }       
         return this;
     }
+   
     Array.prototype.myUnique = function () {
         // var ary =[...(new Set(this))];
         // this.length = 0;
@@ -67,8 +68,6 @@
                 this.splice(i, 1);
                 i--;
             }
-
-
         }
         return this;
 

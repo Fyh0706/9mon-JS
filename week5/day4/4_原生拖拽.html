@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #lit_box {
+            width: 100px;
+            height: 100px;
+            background: salmon;
+        }
+
+        #big_box {
+            width: 400px;
+            height: 400px;
+            border: 1px solid sandybrown;
+            margin: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="lit_box" draggable="true">
+
+    </div>
+    <div id="big_box">
+
+    </div>
+</body>
+
+</html>
+<script>
+    let litbox = document.getElementById('lit_box'),
+        bigbox = document.getElementById('big_box');
+    litbox.ondragstart = function (e) {
+        console.log('start', e);
+
+    }
+    // litbox.ondrag = function (e) {
+    //     console.log('loading...');
+
+    // }
+    litbox.ondragend = function (e) {
+        console.log('end', e);
+
+    }
+    bigbox.ondragenter = function () {
+        console.log('拖进来');
+
+    }
+    bigbox.ondragover = function (e) {
+        console.log('拖上来');
+        return false;
+
+    }
+    bigbox.ondragleave = function () {
+        console.log('离开');
+
+    }
+    bigbox.ondrop = function (e) {
+        e.preventDefault();//阻止默认打开图片
+        console.log(e.dataTransfer.files[0]);
+        let file = e.dataTransfer.files[0];
+        let url = URL.createObjectURL(file);
+        console.log(url);
+       this.innerHTML=`<img src='${url}'/>`
+
+    }
+</script>
