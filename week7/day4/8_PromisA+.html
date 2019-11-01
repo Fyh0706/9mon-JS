@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let p = new Promise(function (res, rej) {
+
+    });
+
+    function MyPromise(executor) {
+        let self = this;//使用self 把当前实例 保存起来
+        self.value = undefined;//存储了 成功执行时  传进来的值
+        self.reason = undefined;//存储了 失败执行时,传进来的值
+        self.status = 'pending';//pending  resolved  rejected
+        self.resCallback = [];//用来存放成功的回调
+        self.rejCallback = [];//用来存放失败的回调
+        function resolve(value) {
+            if (self.status === 'pending') {
+                self.status = 'resolved';//把状态置为resolved
+                // console.log(value);
+                self.value = value;
+                self.resCallback.forEach(item => {
+                    item(self.value);
+                });
+            }
+
+        }
+        function reject(reason) {
+            if (self.status === 'pending') {
+                self.status = 'rejected';//把状态置为rejected;
+                self.reason = reason;
+                self.rejCallback.forEach(item => {
+                    item(self.reason);
+                });
+                // console.log(reason);
+            }
+
+
+        }
+        try {
+            executor(resolve, reject);
+        } catch (error) {
+            reject(error);
+        }
+    };
+    MyPromise.prototype.then = function (res, rej) {
+        let self = this
+        return new MyPromise(function (res, rej) {
+            if (self.status === 'resolved') {
+                res(self.value)
+            }
+            if (self.status === 'rejected') {
+                rej(self.reason);
+            }
+            if (self.status === 'pending') {
+                self.resCallback.push(res);
+                self.rejCallback.push(rej);
+            }
+
+        });
+
+    }
+    let myp = new MyPromise(function (res, rej) {
+        // console.log(666);
+        //需要判断到底让成功执行 还是失败的函数执行
+        res(666)
+        // rej(11)
+        // setTimeout(() => {
+        //     rej(666);
+        // })
+    })
+    myp.then((data) => {
+        console.log(data);
+
+    }, (err) => {
+        console.log(err);
+
+    })
+
+</script>

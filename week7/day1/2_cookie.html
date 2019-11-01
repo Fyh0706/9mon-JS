@@ -1,17 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>
 <script>
-      
-      
+
+
+    /* 
+     种植  cookie
+     cookie  是前端用来保存某些数据用的 ;       前后端 都可能操作
+      document.cookie='qqqq=1213213;expires=2020';//可以设置cookie
+       
+            一般用来存储用户信息  5k左右
+            H5新增的两个前端存储数据的API   大小5M左右  这两个API只能由前端操作
+            localStorage
+            getItem(属性名)
+            setItem(属性名,属性值)
+            removeItem(属性名)
+            clear()全部清除
+            sessionStorage
+ 
+            localStorage    sessionStorage 唯一区别就是localStorage 不会自动清除 sessionStorage会在页面关闭的时候清空
+            
+              getCookie(属性名)  对应的属性值
+              setCookie(属性名,属性值,过期日期)
+              removeCookie(属性名) //把日期设置成过期的日子
+              
+  
+
+              cookie 
+                        1 前后端都可以设置  
+                        2 大小只有5k左右 
+                        3 设置cookie 只能自己编写方法  
+                        4 cookie 有过期时间
+                        5 cookie 会随着请求发送给后台 
+                        一般用来存储用户名
+             localStorage   
+                      1 只能由前端设置  
+                      2 大小在5M左右 
+                      3 有现成的方法 
+                      4 后端无法操作 
+                      5 没有过期时间
+
+                       埋点    --->神策
+ 
+    */
+
+    function getCookie(key) {
+        let str = document.cookie;
+        str += '; ';//补空让最后一个能满足正则
+        let reg = new RegExp(`(^| )${key}=([^; ]+; )`);
+        return str.match(reg) ? str.match(reg)[2] : null;
+    }
+    function setCookie(key, value, date) {
+        date ? document.cookie = `${key}=${value}; Expires=${new Date(date)}` : document.cookie = `${key}=${value};`
+    }
+    function removeCookie(key, domain) {
+        domain ? document.cookie = `${key}=null; domain=${domain}; Expires=${new Date(-1)}` : document.cookie = `${key}=null; Expires=${new Date(-1)}`;
+    }
+
+
 
 </script>

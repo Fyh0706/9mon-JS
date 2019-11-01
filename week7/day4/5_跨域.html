@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    这是一个跨域页面
+</body>
+</html>
+ <script>
+      //浏览器的安全机制 ：
+       /* 
+       协议
+       域名
+       端口
+       三者必须保持一致  只要有一个不同就是跨域
+
+       ajax请求时： 会遇到跨域的问题
+       link   script   img ....这些没有跨域
+     
+     解决跨域的几种方式：
+        jsonp
+           原理  利用script的标签 的 src 不存在跨域  这个特性实现的        
+          
+
+        cors :后台配置  Access-Control-Allow-Origin
+        // 若是post 的复杂数据类型传递(JSON),浏览器会默认先发送一个OPTIONS请求，就是问后台支不支持跨域
+        proxy:找了个本地代理  前端---->自己后端----->其他后端----->返回结果给自己后台---->返回前端
+           
+
+        postMessage
+
+
+        */
+       var abc=123456;
+       window.onmessage=function(e){
+           console.log(e,'跨域');
+           
+       }
+
+</script>

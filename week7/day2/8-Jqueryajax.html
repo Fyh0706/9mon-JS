@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <div id="box"></div>
+</body>
+
+</html>
+<script src="./jquery-3.3.1.js"></script>
+<script src="">
+    $.ajax({
+        method: 'post',
+        url: './data.json',
+        async: true, //代表同步      同步异步
+        cache: false,//代表不走缓存  只针对get起作用
+        headers: {
+            //设置头部信息
+        },
+        timeout: 2000,//设置超时 
+        data: {
+            //传给后台的数据
+            a: 12,
+            b: 13,
+            c: '珠峰'
+        },
+
+        success: function (data) {
+            console.log(data);
+
+        },
+        error: function (err) {
+            console.log(err);
+
+        }
+    })
+    $.get('./data.json', { a: 12, b: 13 }, function (data) {
+        console.log(data, 111);
+
+    })
+</script>
+<script>
+    let inp = document.querySelector('input');
+    let timer = null;
+    inp.oninput = function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            $.ajax({
+                url: `https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1430,21098,20697,29568,29699,29221&wd=${this.value}`,
+                dataType: 'jsonp',
+                success(data) {
+                    let str = '';
+                    data.g = data.g || [];
+                    data.g.forEach(item => {
+                        str += `<h4>${item.q}</h4>`
+                    });
+                    box.innerHTML = str;
+                }
+            })
+        }, 400);
+
+    }
+
+</script>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+/* 
+
+*/
+let p=new Promise(function(res,rej){
+         res(6666);//状态只能由pending变成其他状态
+})
+p.then(function(data){
+   //成功回调
+   console.log(data);
+   
+},function(err){
+   //失败的回调
+   console.log(err);
+   
+})
+Promise.all([P1,P2,P3]).then();
+Promise.race([P1,P2,P3]).then();//比时间
+
+
+</script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    //ajax:  async  javaScript and xml
+    //xhr.readyState 代表请求状态 
+    /* 
+     0  unsent 未发送
+     1   opend  以执行过open函数
+     2   header-received  已经接受响应头
+     3   loading  正在加载响应体                         0-1 是由前端控制的
+     4   done  请求完成                                  1-2  2-3  3-4 都是由http控制的
+     */
+
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'https://www.souyidai.com/fragment/invest_index.json?t=0.4163673011490121', true);
+    xhr.onerror = function () {  //请求失败触发  跨域会触发
+        console.log(666);
+
+    }
+    xhr.timeout=1000;//最长请求时间；超过这个时间后自动结束请求  ontimeout  //监听超时
+    xhr.onabort=function(){
+        //主动打断请求时会触发
+    }
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200){
+
+        }
+    }
+
+    xhr.send();
+    xhr.abort();//主动打断http请求
+
+
+</script>

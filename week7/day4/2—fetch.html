@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script src="./axios.js"></script>
+<script>
+    /*     axios.get('./data.json').then((data) => {
+            console.log('axios', data);
+        }, (err) => {
+            console.log('axios', err);
+    
+        });
+        //默认get请求   需要传参数的时候需要自己拼接url
+        fetch('./data.json').then((data) => {
+            console.log('fatch', data);
+            //return data.json();//把返回结果转为json对象
+            return data.text();//把返回结果转为字符串 
+            //从第二个then才是我们要的东西
+        }, (err) => {
+            console.log('fatch', err);
+    
+        }).then((dat) => {
+            console.log(dat);
+    
+        }).catch((err) => {
+            console.log(err);
+    
+        })
+    
+    
+        fetch('./data.json', {
+            method: 'post',//控制请求方式的
+            body: 'qqq=123',
+            credentials: 'same-origin',//同源可以携带cookie 不跨域//include  所有的请求都可以携带cookie  omit 所有的请求都不带cookie
+            headers: {
+                //设置请求头
+            }
+        }).then((data) => {
+            console.log(data);
+            return data.json();
+        }, (err) => {
+            //超时或者被打断的时候会执行
+            console.log(err);
+    
+        }).then((dat) => {
+            console.log(6666, dat);
+    
+        }, (err) => {
+            console.log(7777, err);
+    
+        });
+     */
+    function http(url, opctions = {}) {
+        let { method = 'get', data = {}, headers = {}, credentials = 'same-origin' } = opctions;
+        let isGet = method.toLowerCase() === 'get';
+        if (isGet) {
+            //如果是get 请求 需要我们把data中的参数补成url后面的search字符串
+            let str = '';
+            for (let k in data) {
+                str += `${k}=${data[k]}&`
+            }
+            str = str.replace(/&$/, '');
+            url = url.indexOf('?') === -1 ? url + "?" + str : url + "&" + str
+        }
+        return fetch(url, {
+            method: method,
+            body: isGet ? null : JSON.stringify(data),
+            headers,
+            credentials,
+        }).then((data) => {
+            if (/[45]\d{2}/.test(data.status)) {
+                throw Error(`${data.status}  ${data.statusText}`)
+            }
+            return data.json();
+        })
+    }
+
+
+    http('./data.json',{
+        method:'get',
+        data:{
+            a:1233,
+            w:134
+        }
+    }).then((data) => {
+        console.log(data);
+
+    }).catch((err) => {
+        console.log(err);
+
+    })
+     http.get=function(url,data){
+         return http(url,{
+             data
+         })
+     }
+     http.post()=function(url,data){
+         return http(url,{
+             method:'post',
+             data
+         })
+     }
+
+    // http('./data.json', {
+    //     method: 'get',
+    //     data: {
+    //         a: 12,
+    //         b: 13
+    //     },
+    //     headers: {},
+    //     credentials: 'same-origion'
+    // }).then((data) => {
+    //     console.log(data);
+
+    // }, () => {
+
+    // })
+
+</script>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        a {
+            color: #333;
+            text-decoration: none;
+
+        }
+
+        h2 {
+            display: none;
+            color: #fff;
+            background: salmon;
+            font-size: 30px;
+        }
+
+        .current {
+            color: #fff;
+            background: salmon;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#css">css</a>
+    <a href="#js">js</a>
+    <a href="#html">html</a>
+    <h2>css</h2>
+    <h2>js</h2>
+    <h2>html</h2>
+</body>
+
+</html>
+<script>
+    /* 
+        cookie    loalStorage  sessionStorage
+        DNS 域名解析
+        URL URN  URI
+        协议：//域名：端口号/路径？search#hash
+        http 80
+        https  在http的基础上增加了一个 SSL 安全套阶层： 默认端口 443
+        ftp 后台上传文件协议  --->21
+        强缓存  cache-control: no-cache//不走强缓存 走协商缓存
+        no-store  所有内容都不会被缓存  既不走强缓存 也不走协商缓存
+     */
+
+    //监听hash 的更改
+    let a = document.querySelectorAll('a');
+    let h2 = document.querySelectorAll('h2');
+
+
+    window.addEventListener('hashchange', function () {
+        init();
+    })
+    function fn(n) {
+        [...a].forEach((item, index) => {
+            if (index == n) {
+                item.classList.add('current');
+                h2[index].style.display = 'block';
+            } else {
+                item.classList.remove('current');
+                h2[index].style.display = 'none';
+            }
+        })
+    }
+    function init() {
+        switch (location.hash) {
+            case "#css":
+                fn(0);
+                break;
+            case "#js":
+                fn(1);
+                break;
+            case "#html":
+                fn(2);
+                break;
+        }
+    }
+    init();
+</script>
