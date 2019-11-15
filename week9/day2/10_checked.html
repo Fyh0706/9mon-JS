@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <h2>水果栏目</h2>
+        <input type="checkbox" v-model='all' id="all" @change='fn'><label for="all">全选</label>
+        <pre>
+                ★ 
+               ★ ★
+             ★  ★ ★ 
+            ★ 车 干 ★ 
+           ★ ★ ★ ★ ★ 
+        </pre>
+        <!--   <input type="checkbox" id='apple' value=1 v-model='checkList'><label for="apple">苹果</label>
+        <input type="checkbox" id='banana' value=2 v-model='checkList'><label for="banana">香蕉</label>
+        <input type="checkbox" id='pear' value=3 v-model='checkList'><label for="pear">梨</label>
+        <input type="checkbox" id='orange' value=4 v-model='checkList'><label for="orange">橘子</label>
+        <input type="checkbox" id='peach' value=5 v-model='checkList'><label for="peach">桃子</label> -->
+        <template v-for='v in backAry'>
+            <input type="checkbox" v-bind:id='v' :value='v' v-model='checkList' @change="click">
+            <label :for="v">{{v}}</label>
+        </template>
+        <!-- template 是vue内置的一个标签 可以避免增加无用标签的这种毛病 -->
+
+        <!-- 多个checkbox 绑定同一个数组 这时数组中的内容就是你选中的checkbox的value的值 -->
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /* 
+     v-bind：专门用来绑定行内属性用的简写是 :
+    */
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰",
+            backAry: ['apple', 'banana', 'pear', 'orange', 'peach'],
+            checkList: [],
+            all: false
+        },
+        methods: {
+            fn() {
+                console.log(this.all);
+                this.all ? this.checkList = this.backAry : this.checkList = [];
+               
+            },
+            click(){
+                if(this.backAry.length===this.checkList.length){
+                    this.all=true;
+                }else{
+                    this.all=false;
+                }
+            }
+        },
+
+    })
+</script>

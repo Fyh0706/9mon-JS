@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script src>
+         //http  三握四挥   https 和 http
+    /*
+       ajax  timeout  abort   ontimeout  onabort
+    readyState: 0-4   ;    status  http状态码
+       304 ---->强制缓存 协商缓存
+       axios   拦截器  请求拦截器  处理参数 每一个请求都需要做一个处理 我们把它直接写入请求拦截器种   响应拦截   response  response.data       error code(请求失败) code!==0 的时候直接弹出alert()
+       axios  get post   'content-type:'   ----参数必须转为seach
+       //fatch fatch(url,{}).then(()={
+           需要判断成功还是失败
+       },()=>{}).then(()=>{
+           data.json()//必须返回json() 才可以拿到数   credentials(是否携带凭证cookie)   same-origin    include  omit
+       })
+
+        PromiseA+
+        webSocket  socket.io
+        onopen
+        onmessage
+        onerror
+        onclose
+         send
+         close
+         onstorage//监听Storage 的改变
+
+
+
+         跨域 --->浏览器的    ‘同源策略’
+         jsonp  利于 script src 不存在跨域
+         nginx反向代理
+         cors跨域  后端设置响应头
+         postMessage跨域  ifarm  open
+
+
+
+
+
+
+
+
+    */
+
+</script>
+<script>
+    function fn(s) {
+        let reg = /(\d+)\[([a-zA-Z]+)\]/;
+       
+        s = s.replace(reg, (a, b, c) => {
+            let str = '';
+            for (let i = 0; i < b; i++) {
+                str += c;
+            }
+            return str;
+        })
+        return s.indexOf('[') !== -1 ? fn(s) : s;
+    }
+
+
+
+</script>

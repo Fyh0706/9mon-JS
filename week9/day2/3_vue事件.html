@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <button v-on:click='myalert'>按钮</button>
+        <button @click='myalert()'>按钮2</button>
+        <button @click='myalert($event,666,777,888,name)'>按钮3</button>
+        <a href="https://baidu.com" @click.prevent='myalert'>百度</a>
+        <!-- <button @click='name'>按钮2</button> -->
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    // v-on 是为了专门绑定事件 的 指令； 简写 @
+    //@click='函数名' 在methods中的函数会接收一个事件对象作为参数
+    //@click='函数名()' 相当于没有给函数传任何实参
+    //@click='函数名(666)' 相当于给函数传递了一个实参666
+    //事件修饰符   prevent(preventDefault)  stop(stopPropergation)  
+    //once 只能点击一次     self 只有当点击元素自身的时候才会触发对应的函数
+    // capture 在捕获阶段触发对应的函数
+    // passive 先执行默认行为  再执行对应的事件
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        },
+        methods: {
+            //这个对象中存放的都是vue 当前实例要用到的方法 
+            // 这里的方法的this 统一是当前的实例
+            //methods 中的内容和data中的内容  都会被挂载到当前实例上
+            //所以 methods 中的属性名 和data 中的属性名不能重复
+            //若既要传自己的参数，又要传事件对象 则需要手动写一个 $event 实参
+            myalert(e) {
+              console.log(this.name,e);
+              console.log(arguments);
+               
+              
+            }
+            // name(){
+            //     console.log(666);
+                
+            // }
+        }
+    })
+</script>
