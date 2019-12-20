@@ -13,19 +13,19 @@ const routes = [
     path: '/',
     name: 'index',
     component: Index,
-    redirect:'/org',
-    children:[
+    redirect: '/org',
+    children: [
       {
-        path:'/org',
-        name:'org',
+        path: '/org',
+        name: 'org',
         component: () => import(/* webpackChunkName: "login" */ '../views/org.vue'),
-        children:org
+        children: org
       },
-      { 
-        path:'/crm',
-        name:'crm',
-        component:() => import(/* webpackChunkName: "login" */ '../views/crm.vue'),
-        children:crm
+      {
+        path: '/crm',
+        name: 'crm',
+        component: () => import(/* webpackChunkName: "login" */ '../views/crm.vue'),
+        children: crm
       }
     ]
   },
@@ -36,6 +36,10 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
+  },
+  {
+    path: '*',//走到不存在的路径时重新调转到首页
+    redirect: '/'
   }
 ]
 

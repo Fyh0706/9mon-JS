@@ -1,37 +1,50 @@
-import axios from 'axios'
+import http from './http'
+//请求部门列表数据
+export function getDpList() {
+    return http.get('/department/list')
+}
 
-let url = process.env.NODE_ENV !== 'production' ? '' : 'https://www.zhihu.com/api';
-//根据当前到底是开发环境还是生成环境来决定 基础路径是哪个，开发环境下 不需要基础路径
-//因为开发环境下 我们就是让请求 去 localhost:8080 然后node会根据配置的proxy代理 将请求转接到对于的远程地址   proxy只在开发环境下有用  生成环境下 是没用的；
-const http = axios.create({
-    baseURL: url,
-    transformRequest(data) {
-        // console.log(data);
-        //lodash
-        let str = '';
-        for(let k in data) {
-            str += `${k}=${data[k]}&`
-        }
-        return str
-    },
-    params: {
-        t: Math.random()
-    },
-    timeout: 1000
-});
-//添加请求拦截器
-http.interceptors.request.use(function (config) {
+//删除部门列表中的数据
+export function delDpList(departmentId) {
+    return http.get('/department/delete', {
+        params: { departmentId }
+    })
+}
+//新增部门接口
+export function addDplist(option){
+ return http.post('/department/add',option)
+}
+//修改部门接口
+export function upDpList(option) {
+    return http.post('/department/update',option)
+}
+ //获取用户列表接口
+ export function getUserList(option){
+     //option  {departmentId:0,search:''}
+     return http.get('/user/list',{
+         params:option
+     })
+ }
+ //新增用户列表接口
+ export function addUserList(option){
+  return http.post('/user/add',option)
+ }
+ //更新用户列表接口
+ export function upUserList(option){
+     return http.post('/user/update',option)
+ }
+ //删除用户列表接口
 
-    return config
-}, function (error) {
-    return Promise.reject(error)
-});
-// 添加响应拦截器
-http.interceptors.response.use(function (response) {
-    
-    return response.data;
-}, function (error) {
-    
-    return Promise.reject(error);
-});
-export default http;
+ export function delUserList(userId){
+     return http.get('/user/delete',{
+         params:{userId}
+     })
+ }
+ //获取职务列表接口
+ export function getJobList(){
+     return http.get('/job/list')
+ }
+
+
+
+

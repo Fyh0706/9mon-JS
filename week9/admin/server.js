@@ -12,6 +12,7 @@ app.listen(CONFIG.PORT, () => {
 /*-MIDDLE WARE-*/
 app.use((req, res, next) => {
 	const {
+		
 		ALLOW_ORIGIN,
 		CREDENTIALS,
 		HEADERS,

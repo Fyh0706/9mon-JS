@@ -4,7 +4,7 @@ import job from '@/components/job'
 import addJob from '@/components/job/add'
 import user from '@/components/user'
 import addUser from '@/components/user/add'
-
+// userhandle|departhandle|jobhandle|departcustomer|allcustomer|resetpassword
 export default [
     {
         path: '/org/department',
@@ -14,7 +14,8 @@ export default [
             type:'department',
             rootTil:'部门管理',
             til:'部门列表',
-            icon:'el-icon-user-solid'
+            icon:'el-icon-user-solid',
+            power:'departhandle'
         }
     },
     {
@@ -24,8 +25,9 @@ export default [
         meta:{
             type:'department',
             rootTil:'部门管理',
-            til:'部门员工',
-            icon:'el-icon-user-solid'
+            til:'新增部门',
+            icon:'el-icon-user-solid',
+            power:'departhandle'
         }
     },
     {
@@ -36,7 +38,8 @@ export default [
             type:'job',
             rootTil:'职务管理',
             til:'职务列表',
-            icon:'el-icon-suitcase'
+            icon:'el-icon-suitcase',
+            power:'jobhandle'
         }
 
     },
@@ -48,7 +51,8 @@ export default [
             type:'job',
             rootTil:'职务管理',
             til:'新增职务',
-            icon:'el-icon-suitcase'
+            icon:'el-icon-suitcase',
+            power:'jobhandle'
         }
     },
     {
@@ -59,7 +63,8 @@ export default [
             type:'user',
             rootTil:'员工管理',
             til:'员工列表',
-            icon:'el-icon-bank-card'
+            icon:'el-icon-bank-card',
+            power:'userhandle'
         }
 
     },
@@ -71,7 +76,8 @@ export default [
             type:'user',
             rootTil:'员工管理',
             til:'新增员工',
-            icon:'el-icon-bank-card'
+            icon:'el-icon-bank-card',
+            power:'userhandle'
         }
     }
 ]

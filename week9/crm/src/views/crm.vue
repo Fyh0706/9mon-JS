@@ -1,20 +1,26 @@
 <template>
     <el-container>
-        <el-aside width="200px">Aside</el-aside>
-        <el-main>CRM----Main</el-main>
+      <my-nav :ary="ary"></my-nav>
+        <el-main>
+            <router-view></router-view>
+        </el-main>
       </el-container>
 </template>
 <script>
 // @ is an alias to /src
+import nav from "@/components/nav";
+import ary from '@/router/customer.js'
 export default {
-    name: 'XXX',
     data() {
         return {
-        
+         ary:ary
         }
     },
+    // created() {
+    //     console.log(this.ary)
+    // },
     components: {
-        
+        'my-nav':nav
     }
 }
 </script>
