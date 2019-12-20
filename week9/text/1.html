@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <el-input v-model="name" placeholder="姓名" style="width: 200px;"></el-input>
+        <el-input v-model="age" type='number' placeholder="年龄" style="width: 200px;"></el-input>
+        <el-button type="primary" @click='submit'>提交</el-button>
+        <man :list='manList' @change='delFn'></man>
+        <boy :list='boyList' @change='delFn'></boy>
+
+
+    </div>
+</body>
+<template id='man'>
+    <div style="float: left;">
+        <h3> 这是一个成年</h3>
+        <ul>
+            <li v-for='item in list' :key="item.id">姓名：{{item.name}}；年龄：{{item.age}}
+                <el-button type="danger" icon="el-icon-delete" circle @click="del(item)"></el-button>
+            </li>
+        </ul>
+    </div>
+</template>
+<template id='boy'>
+    <div style="float: right;">
+        <h3>这是一个未成年</h3>
+        <ul>
+            <li v-for='item in list' :key="item.id">姓名：{{item.name}}；年龄：{{item.age}}
+                <el-button type="danger" icon="el-icon-delete" circle @click="del(item)"></el-button>
+            </li>
+        </ul>
+    </div>
+</template>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    let man = {
+        template: '#man',
+        props: ['list'],
+        methods: {
+            del(item) {
+              this.$emit('change',item)
+            }
+        }
+    }
+    let boy = {
+        template: '#boy',
+        props: ["list"],
+        methods: {
+            del(item) {
+                this.$emit('change',item)
+            }
+        },
+    }
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: '',
+            age: '',
+            ary: []
+        },
+        components: {
+            man, boy
+        },
+        computed: {
+            manList() {
+                return this.ary.filter(item => item.age >= 18)
+            },
+            boyList() {
+                return this.ary.filter(item => item.age < 18)
+            }
+        },
+        methods: {
+            submit() {
+                let obj = {
+                    name: this.name,
+                    age: this.age,
+                    id: Math.random()
+                }
+                this.ary.unshift(obj)
+                this.name = '',
+                    this.age = ''
+            },
+            delFn(item) {
+                this.ary=this.ary.filter(it=>it.id!==item.id)
+            }
+        },
+    })
+</script>

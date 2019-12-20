@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        li {
+            list-style: none;
+
+        }
+
+        .tabBox {
+            display: flex;
+            width: 600px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .tabBox li {
+            flex: 1;
+            background: skyblue;
+            margin-right: 2px;
+            color: #ffffff;
+            user-select: none;
+            max-width: 80px;
+        }
+
+        .tabBox .current {
+            background: salmon;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <my-tab v-model='index' :data='ary' @change='fn' @tab-remove='tabRm'></my-tab>
+    </div>
+</body>
+<template id='mytab'>
+
+    <ul class="tabBox">
+        <li v-for="(item,index) in data" :class="{current:index === value}" @click='tabFn(index,item)'>
+            {{item}} &nbsp;&nbsp;&nbsp; <span @click.stop='delFn(index)'>X</span>
+        </li>
+    </ul>
+
+</template>
+
+</html>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('my-tab', {
+        template: '#mytab',
+        props: ['data','value'],
+       
+        methods: {
+            tabFn(n, str) {
+                // this.value = n;
+                this.$emit('input',n)
+                this.$emit('change', n, str)
+            },
+            delFn(n) {
+                // this.data=[]
+                //  this.data.splice(n,1)  // 在 子组件直接修改父组件的数据无迹可寻
+                this.$emit('tab-remove',n);
+                this.$emit('input',0);
+            }
+        },
+    })
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰",
+            ary: ['css', 'html', 'js', 'vue', 'node'],
+            index:3
+        },
+        methods: {
+            fn(n, item) {
+                console.log(n, item);
+            },
+            tabRm(n) {
+               this.ary.splice(n, 1)
+            }
+        },
+    })
+</script>

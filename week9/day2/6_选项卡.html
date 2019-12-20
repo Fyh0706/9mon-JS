@@ -25,13 +25,16 @@
             text-align: center;
             line-height: 400px; 
         }
+        .current{
+            background:cadetblue;
+        }
     </style>
 </head>
 
 <body>
     <div id="app" v-cloak>
         <h1>{{name}}</h1>
-        <button v-for='(item,index) in ary' @click='change(index)'>{{item}}</button>
+        <button v-for='(item,index) in ary' @click='change(index)' :class='{current:qqq==index}'>{{item}}</button>
         <div class='body' v-for='(item,index) in body' v-show='index===qqq'>{{item}}</div>
        <!--  <div class='body' >{{body[qqq]}}</div> -->
     </div>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <ul>
+            <li v-for='item in ary' ref='qqq'>{{item}}</li>
+        </ul>
+        <ul>
+            <li ref='www'></li>
+            <li ref='www'></li>
+            <li ref='www'></li>
+        </ul>
+        <my-btn v-for="item in ary" :key='item' ref='qqq'></my-btn>
+        
+    </div>
+</body>
+<template id='btn'>
+
+    <button @click='clickFn'>按钮</button>
+
+</template>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    // ref 除了获取元素  还可以获取组件
+    // 获取到组件之后  我们就可以根据自己的需求进行编写
+
+
+    //父组件怎么调用到 子组件的methods中的函数
+    //子组件怎么调用到  父组件的methods中的函数
+    let obj = {
+        template: "#btn",
+        methods: {
+            clickFn(e) {
+                this.$emit("click", e)
+            }
+        },
+    }
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰",
+            ary: [1, 2, 3, 4]
+        },
+        components:{
+            "my-btn":obj
+        },
+        mounted() {
+            console.log(this.$refs.qqq);//v-for 出来的可以获取一组
+            console.log(this.$refs.www);//静态写死的只获取一个
+            this.ary.pop();
+            console.log(this.$refs.qqq)
+            this.$nextTick(() => {
+                // DOM更新完成之后会触发      DOM 更新是异步的 
+                console.log(this.$refs.qqq)
+            })
+        },
+    })
+</script>

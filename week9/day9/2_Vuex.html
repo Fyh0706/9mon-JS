@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <h3>{{$store.state.count}}</h3>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vuex/dist/vuex.js"></script>
+<script>
+    let myStore=new Vuex.Store({
+        state:{
+            count:0
+        },
+        mutations:{
+            add(state){
+                //state 就是上面的仓库
+                state.count++;
+            }
+        }
+    })
+    //  Vue.use
+    let obj={
+        //若use 传进去的是一个对象  则会执行里面的install方法
+        install(_Vue){
+            console.log(_Vue);
+            
+        }
+    };
+    let fn=function(_Vue){
+        //若 use 传进来的是一个函数 则会当作 install 方法执行
+      console.log('fn',_Vue);
+    }
+    Vue.use(obj);
+    Vue.use(fn);
+    let vm = new Vue({
+        el: '#app',
+        store:myStore,
+        data: {
+            name: "珠峰"
+        },
+        
+    })
+</script>

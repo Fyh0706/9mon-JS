@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+    <style>
+        .aa {
+            background: salmon;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+
+        h2 {
+            background: #b0b0b0;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .v-enter {
+            opacity: 0;
+            transform: translateX(200px);
+        }
+
+        .v-enter-active {
+            transition: all 1s;
+        }
+
+        .v-enter-to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .v-leave {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .v-leave-active {
+            transition: all 1s;
+        }
+
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(200px);
+        }
+
+        .qqq-enter {
+            opacity: 0;
+            transform: scale(0.2);
+        }
+
+        .qqq-enter-active {
+            transition: all 1s;
+        }
+
+        .qqq-enter-to {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .myanimation-enter-active {
+            animation: move 1s;
+        }
+
+        .myanimation-leave-active {
+            animation: move 1s reverse;
+            /* 相反的动画效果 */
+        }
+
+        @keyframes move {
+            0% {
+                opacity: 0;
+                transform: scale(0.2);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <button @click='fn'>按钮</button>
+        <!-- <transition>
+             这里面只能写一个根元素 
+            <h1 v-show="flag">{{name}}</h1>
+        </transition>
+        <transition name='qqq'>
+              这里面只能写一个根元素 
+            <div class='aa' v-show="flag">{{name}}</div>
+        </transition> -->
+
+
+        <!-- 帧动画 -->
+        <transition name='myanimation'>
+            <!-- <div class="aa" v-if='flag'>
+                {{name}}{{name}}
+            </div> -->
+        </transition>
+        <!-- 结合animate.css动画使用 -->
+        <transition 
+        name='ss' 
+        enter-active-class='animated tada'
+        leave-active-class='animated bounceOut'
+        mode='out-in'
+          >
+            <!--mode ='out-in' 是控制先消失再显示  -->
+            <h2 v-if='flag' key='1'>
+                {{name}} {{name}}
+            </h2>
+            <h2 v-else='flag'>
+                {{name}}
+            </h2>
+        </transition>
+     
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰",
+            flag: true
+        },
+        methods: {
+            fn() {
+                this.flag = !this.flag
+            }
+        },
+    })
+</script>

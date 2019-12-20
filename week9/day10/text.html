@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <my-show> </my-show>
+        <my-show> </my-show>
+        
+    </div>
+</body>
+<template id='myShow'>
+    <div>
+        <h1>show组件下的数字是</h1>
+        <my-show1></my-show1>
+     
+       
+    </div>
+</template>
+<template id='myShow1'>
+    <div>
+        <h1>show组件下的数字是111</h1>
+    </div>
+</template>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('my-show1', {
+        template: '#myShow1',
+        created() {
+            console.log('show1', this)
+        },
+    })
+    Vue.component('my-show', {
+        template: '#myShow',
+        created() {
+            console.log('show', this)
+        },
+    })
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        }
+    })
+</script>

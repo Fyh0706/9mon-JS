@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <my-count></my-count>
+        <my-num></my-num>
+    </div>
+</body>
+
+</html>
+<template id='mycount'>
+    <div>
+        <h2>{{name}}</h2>
+        <my-num></my-num>
+        <!-- <my-count></my-count> -->
+
+    </div>
+</template>
+<template id='myNum'>
+    <div>
+        <h2>这是一个局部私有组件</h2>
+        <!-- <my-count></my-count> -->
+    </div>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /* 
+     全局组件是通过Vue.component创造， 创造完成之后   所以组件都能使用
+     局部组件  先声明一个对象  再去要使用该局部组件的 那个组件去注册 然后才可以使用
+                 ----声明{}  ----注册components----使用 
+    
+    
+    */
+    let myNum = {
+        template: '#myNum',
+        data() {
+            return {
+                name: 'number组件'
+            }
+        }
+    }
+    Vue.component('my-count', {
+        template: '#mycount',
+        name: 'my-count',
+        data() {
+            return {
+                name: '珠峰培训楼'
+            }
+        },
+        components: {
+            //属性名就是当前组件中要使用的那个-----组件名
+            'my-num': myNum
+        }
+    });
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        },
+        filters: {
+
+        },
+        directives: {},
+        components: {
+            //局部组件注册
+            'my-num': myNum
+        }
+    })
+</script>

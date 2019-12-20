@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1 :class='qqq'>{{name}}</h1>
+        <h2 :class='{qwer:flag}'>{{name}}</h2>
+        <!-- 属性名为添加的类名  属性值 是管理这个类名加不加的问题  true加  false 就不加 -->
+        <h2 :class='ary'>{{name}}</h2>
+        <div style='background: red;'>{{name}}</div>
+        <div :style='obj'>{{name}}</div>
+        <button @click='fn'>切换</button>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰",
+            qqq: 'a',
+            flag:true,
+            ary:['q','w','e','r'],
+            obj:{
+                'background':'red',
+                'font-size':'40px',
+                
+            }
+        },
+        methods: {
+            fn() {
+                this.flag=!this.flag
+                this.qqq = this.qqq === 'a' ? 'b' : 'a';
+                this.ary.pop()
+            }
+        },
+    })
+</script>

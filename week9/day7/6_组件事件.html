@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <!-- 只要是组件上的事件 不管长成什么样 都是自定义事件 -->
+        <my-btn @click='fn' class="qqq" icon=''></my-btn>
+    </div>
+</body>
+<template id='btn'>
+
+    <button @click='clickFn'>按钮</button>
+
+</template>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let obj = {
+        template: "#btn",
+        methods: {
+            clickFn(e) {
+                this.$emit("click", e)
+            }
+        },
+    }
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        },
+        components: {
+            "my-btn": obj
+        },
+        methods: {
+            fn() {
+                console.log(arguments)
+            }
+        },
+    })
+    //所以的Vuez组件 都有一个$root 属性 指向当前项目的根组件
+</script>
+<script>
+    function Fn() {
+        this.x = 1;
+        y = 2;
+        this.getX = function () {
+            console.log(this.x);
+        }
+    }
+    Fn.prototype.getX = function () {
+        this.y += 1;
+        this.y = 2;
+        console.log(this.x, this.y);
+    };
+    Fn.prototype = {
+        x: 'zhufeng',
+        getY: function () {
+            this.y += 1;
+            console.log(this.y);
+        },
+        sum: function () {
+            console.log(this.x + this.y);
+        }
+    };
+    let f1 = new Fn;
+    let f2 = new Fn;
+    console.log(f1.getX === f2.getX);
+    console.log(f1.getY === f2.getY);
+    console.log(f1.__proto__.getX === Fn.prototype.getX);
+    console.log(f1.prototype);
+    console.log(f1.constructor);
+    f1.getX();
+    Fn.prototype.getX();
+    let fn = f2.getY;
+    fn();
+    Fn.prototype.getY();
+    f1.sum();
+
+</script>

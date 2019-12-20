@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <count></count>
+    </div>
+
+</body>
+
+</html>
+<template id='mycount'>
+    <div>hello world{{name}}
+        <button @click='changeName'>点击</button>
+        <h3> {{name2}}</h3>
+    </div>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /* 
+       Vue.component(组件名，{})
+        组件名可以是烤串命名 和 驼峰命名 但使用的时候 都得是烤串命名
+        组件名不能是已经存在的html标签
+
+        组件的模板只能有一个根元素，与transition 标签类似
+       
+          options 中的属性 跟  根实例 基本一致   只是组件的data属性必须是一个函数
+                  这是为了保证  组建的独立性
+     
+    */
+    Vue.component('count', {
+        /* 
+          命名的时候不能是已经存在的html标签
+        */
+        template: '#mycount',
+        data() {
+            //就是为了保证数据的独立性
+            return {
+                name: 666
+            }
+        },
+        computed: {
+            name2() {
+                return this.name + 'computed'
+            }
+        },
+        methods: {
+            changeName() {
+                //this 都是当前的实例
+                //在Vue中组件就是Vue实例
+                //  vm(new Vue) 我们称为根实例或者根组件
+                this.name = Math.random();
+                // console.log(this);
+
+            }
+        },
+    })
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        },
+
+    })
+</script>

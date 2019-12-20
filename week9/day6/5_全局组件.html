@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <qqq></qqq>
+        <el-qqq></el-qqq>
+        <!-- 组件的使用可以是单标签  但是单标签  下面的组件就不在渲染了
+              所以使用的时候  尽量使用闭合标签    
+
+              组件的命名可以是  - 命名方式  这个方式在Vue 很安全 也可以是驼峰式命名
+              但是在使用的时候需要转成 - （烤串） 使用
+        -->
+        <!-- <myComponten> </myComponten> -->
+        <my-componten></my-component>
+        <!-- <el-qqq/>
+        <qqq></qqq>
+        <el-qqq/> -->
+    </div>
+    <div id="app2">
+        <qqq></qqq>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    //Vue.filter   Vue .directive
+     Vue.component('qqq',{
+         template:'<div>这是一个全局组件</div>'
+     })
+     Vue.component('el-qqq',{
+         template:'<h2>这也是一个全局组件</h2>'
+     })
+     Vue.component('myComponten',{
+         template:'<h3>我是车干</h3>'
+     })
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        }
+    })
+    let vm2=new Vue({
+        el:'#app2',
+        data:{
+            name:'aaa'
+        }
+    })
+</script>

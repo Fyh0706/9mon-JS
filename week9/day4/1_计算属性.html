@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <input type="text" v-model='name'>
+        <h1>{{name}}</h1>
+        <h2>{{name|reverse}}</h2>
+
+        <h2>{{reverse(name)}}</h2>
+        <h2>{{reverseName}}</h2>
+
+        {{t}}
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        /* 
+         el,data,template,methods,filters,created
+        */
+        el: '#app',
+        data: {
+            name: "珠峰",
+            t: 0
+        },
+        methods: {
+            fn() {
+                //this vm
+            },
+            reverse(val) {
+                //this 不是当前实例
+                return val.split('').reverse().join('')
+            }
+        },
+        computed: {
+            //计算属性
+            //计算属性对应的值会被挂载到当前实例上 挂载的内容是函数返回值
+            reverseName() {
+                // 代表的就是name的内容翻转
+                console.log(11111111);
+                return this.name.split('').reverse().join('')
+            },
+            reverseName2: {
+                get() {
+                    return this.name.split('').join('+')
+                },
+                set(val) {
+                    console.log(val);
+                }
+            }
+        },
+        filters: { //过滤器
+            //管道符  |
+            reverse(val) {
+                //this 不是当前实例
+                // 计算属性  会有一个缓存 ，当计算属性依赖的值不发生改变，那么视图刷新时 他就会使用上一次计算出来的结果进行展示  不会再执行函数 
+                //依赖就是再函数中用到哪个变量，就是依赖哪  个变量
+                console.log(666);
+                return val.split('').reverse().join('')
+            },
+
+        },
+        created() {
+            //一进来就执行
+        },
+    })
+</script>

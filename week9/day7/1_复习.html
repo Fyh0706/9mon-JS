@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <my-count>
+        </my-count>
+     
+      
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /* 
+        全局组件    局部组件
+         Vue.component(组件名,{
+           template:'用来渲染的模板',
+           data(){
+               return {
+                   //保证组件之间的独立
+               }
+           }
+   })
+    
+    */
+    let mycount2 = {
+        //局部组件在哪个组件使用就必须在哪个组件注册 不存在继承的问题
+        template: '<h2>这是局部组件计数{{count}}</h2>',
+        
+        data() {
+            return {
+                count: 1
+            }
+        }
+    }
+    Vue.component('my-count', {
+        template: "<h1 @click='add'>这是一个计数的组件{{count}} <my-c2></my-c2></h1>",//只能有一个根元素
+        data() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            add() {
+                //???
+                this.count++;
+            }
+        },
+        components: {
+            //组件名：对应的对象
+            'my-c2': mycount2
+        }
+    })
+    //父子组件   ： A组件中使用了B组件  那么 A就是父组件
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        }
+    })
+</script>

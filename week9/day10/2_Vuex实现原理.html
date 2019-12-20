@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <h1>{{name}}</h1>
+        <h2>数字是{{count}}</h2>
+        {{$store.getters.countType}}
+        <my-show></my-show>
+        <my-btn></my-btn>
+
+    </div>
+</body>
+<template id='myBtn'>
+    <div>
+        <h2>Btn组件下的数字是{{$store.state.count}}</h2>
+        <button @click='add'>+</button>
+        <button @click='minus'>-</button>
+    </div>
+</template>
+<template id='myShow'>
+    <div>
+        <h1>show组件下的数字是{{$store.state.count}}</h1>
+
+    </div>
+</template>
+
+</html>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./myVuex.js"></script>
+<script>
+    Vue.use(Vuex);
+    let store = new Vuex.Store({
+        state: {
+            count: 100
+        },
+        getters: {
+            countType(state) {
+                return state.count % 2 ? "奇数":'偶数'
+            }
+        },
+        mutations: {
+            change(state, option) {
+                state.count += option.num
+            },
+
+        },
+        actions: {
+            change(store, option) {
+                setTimeout(() => {
+                    store.commit('change', option)
+                }, 2000);
+            }
+        }
+    })
+    Vue.component('my-btn', {
+        template: '#myBtn',
+        created() {
+            console.log('mybtn' + this)
+        },
+        methods: {
+            // add() {
+            //     this.$store.commit('change', { num: 10 })
+            // },
+            add() {
+                this.$store.dispatch('change', { num: 10 })
+            },
+            // minus() {
+            //     this.$store.commit('change', { num: -10 })
+            // }
+            minus() {
+                this.$store.dispatch('change', { num: -10 })
+            }
+        },
+
+    });
+    Vue.component('my-show', {
+        template: '#myShow',
+        created() {
+            console.log('show', this)
+        },
+    })
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        },
+
+        store: store,
+        computed: {
+            ...Vuex.mapState(['count'])
+        },
+        methods:{
+            ...Vuex.mapActions(['change'])
+        }
+    })
+</script>
